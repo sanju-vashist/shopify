@@ -12,11 +12,11 @@
       <span>{{ product.title }}</span>
     </nav>
 
-    <!-- Brand Header Bar -->
-    <div class="product-brand-bar">
-      <div class="product-brand-bar__line"></div>
-      <span class="product-brand-bar__text">OMNILYX · SKINCARE</span>
-      <div class="product-brand-bar__line"></div>
+    <!-- Frame 3 Top Bar -->
+    <div class="f3-brand-bar">
+      <div class="f3-brand-bar__line"></div>
+      <h2 class="f3-brand-bar__text">OMNILYX . SkinCare</h2>
+      <div class="f3-brand-bar__line"></div>
     </div>
 
     <!-- Product Layout -->
@@ -24,8 +24,11 @@
 
       <!-- LEFT: Product Info -->
       <div class="product-info">
-        <div class="product-info__bg-text" aria-hidden="true">{{ product.type | upcase | default: 'GLOW' }}</div>
-        <h1 class="product-info__title">{{ product.title }}</h1>
+        <h1 class="product-info__title">
+          <span>{{ product.title | default: 'Constituir' }}</span><br>
+          <span>Glass Your</span><br>
+          <span>Glow</span>
+        </h1>
         <p class="product-info__desc">{{ product.description | strip_html | truncate: 200 }}</p>
 
         <!-- Ingredient Tags -->
@@ -83,7 +86,7 @@
             </div>
           </div>
 
-          <button type="submit" class="btn-add-to-cart" id="AddToCart"
+          <button type="submit" class="btn-add-to-cart f3-btn-add" id="AddToCart"
                   {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
             {%- if product.selected_or_first_available_variant.available -%}
               Add to Bag →
@@ -91,19 +94,13 @@
               Sold Out
             {%- endif -%}
           </button>
-
-          <div class="product-trust-row">
-            <span>✓ Free shipping above ₹799</span>
-            <span>✓ Dermatologist Tested</span>
-            <span>✓ 30-day returns</span>
-            <span>✓ Authentic product</span>
-          </div>
         </form>
       </div>
 
       <!-- CENTER: Gallery -->
-      <div class="product-gallery" id="ProductGallery">
-        <div class="product-gallery__main">
+      <div class="product-gallery f3-gallery" id="ProductGallery">
+        <div class="f3-bg-glow">GLOW</div>
+        <div class="product-gallery__main f3-main-img">
           {%- if product.featured_image -%}
             <img id="MainProductImage"
                  src="{{ product.featured_image | image_url: width: 700 }}"
@@ -111,7 +108,11 @@
                  width="700" height="700" loading="eager"
                  style="view-transition-name: product-main-image;">
           {%- else -%}
-            {{ 'product-1' | placeholder_svg_tag: 'product-gallery__placeholder' }}
+            <img id="MainProductImage"
+                 src="{{ 'product1-removebg.png' | file_url }}"
+                 alt="Constituir Brightening Cream"
+                 width="700" height="700" loading="eager"
+                 style="view-transition-name: product-main-image;">
           {%- endif -%}
         </div>
         {%- if product.images.size > 1 -%}
@@ -129,56 +130,71 @@
       </div>
 
       <!-- RIGHT: Product Specs -->
-      <div class="product-specs">
-        <h3 class="product-specs__title">Product Details</h3>
-        <div class="product-specs__table">
-          {%- if product.vendor != blank -%}
-            <div class="spec-row"><span class="spec-label">Brand</span><div><span class="spec-value">{{ product.vendor }}</span></div></div>
-          {%- endif -%}
-          {%- if product.type != blank -%}
-            <div class="spec-row"><span class="spec-label">Type</span><div><span class="spec-value">{{ product.type }}</span></div></div>
-          {%- endif -%}
-          {%- if product.selected_or_first_available_variant.sku != blank -%}
-            <div class="spec-row"><span class="spec-label">SKU</span><div><span class="spec-value">{{ product.selected_or_first_available_variant.sku }}</span></div></div>
-          {%- endif -%}
-          <div class="spec-row"><span class="spec-label">Availability</span>
-            <div><span class="spec-value{% if product.available %} spec-value--in-stock{% else %} spec-value--oos{% endif %}">
-              {{ product.available | yesno: 'In Stock', 'Out of Stock' }}
-            </span></div>
+      <div class="product-specs f3-specs">
+        <div class="f3-spec-row">
+          <div class="f3-spec-label">Bottle</div>
+          <div class="f3-spec-value-box">
+            <span class="f3-spec-val">Borosilicate Glass</span>
+            <span class="f3-spec-sub">Heavy-wall, heat-resistant</span>
           </div>
-          {%- for tag in product.tags -%}
-            {%- if tag contains ':' -%}
-              {%- assign kv = tag | split: ':' -%}
-              <div class="spec-row">
-                <span class="spec-label">{{ kv[0] | strip }}</span>
-                <div><span class="spec-value">{{ kv[1] | strip }}</span></div>
-              </div>
-            {%- endif -%}
-          {%- endfor -%}
         </div>
-
-        <!-- Full Description -->
-        {%- if product.description != blank -%}
-          <details class="product-details-accordion">
-            <summary>Full Description</summary>
-            <div class="product-details-accordion__content">{{ product.description }}</div>
-          </details>
-        {%- endif -%}
-
-        <!-- Reviews placeholder -->
-        <div class="product-reviews-mini">
-          <div class="product-review-item">
-            <div class="review-stars">★★★★★</div>
-            <p>"Skin glows for real!"</p>
-            <span>– Priya, Delhi</span>
+        <div class="f3-spec-row">
+          <div class="f3-spec-label">Pump</div>
+          <div class="f3-spec-value-box">
+            <span class="f3-spec-val">Gold Anodized Zinc</span>
+            <span class="f3-spec-sub">Airless pump, 0.3ml per press</span>
           </div>
-          <div class="product-review-item">
-            <div class="review-stars">★★★★★</div>
-            <p>"Spots faded in 3 wks"</p>
-            <span>– Aisha, Mumbai</span>
+        </div>
+        <div class="f3-spec-row">
+          <div class="f3-spec-label">Label</div>
+          <div class="f3-spec-value-box">
+            <span class="f3-spec-val">Borosilicate Glass</span>
+            <span class="f3-spec-sub">Heavy-wall, heat-resistant</span>
+          </div>
+        </div>
+        <div class="f3-spec-row">
+          <div class="f3-spec-label">Volume</div>
+          <div class="f3-spec-value-box">
+            <span class="f3-spec-val">Borosilicate Glass</span>
+            <span class="f3-spec-sub">Heavy-wall, heat-resistant</span>
+          </div>
+        </div>
+        <div class="f3-spec-row">
+          <div class="f3-spec-label">Formula</div>
+          <div class="f3-spec-value-box">
+            <span class="f3-spec-val">Borosilicate Glass</span>
+            <span class="f3-spec-sub">Heavy-wall, heat-resistant</span>
+          </div>
+        </div>
+        <div class="f3-spec-row">
+          <div class="f3-spec-label">Finish</div>
+          <div class="f3-spec-value-box">
+            <span class="f3-spec-val">Borosilicate Glass</span>
+            <span class="f3-spec-sub">Heavy-wall, heat-resistant</span>
+          </div>
+        </div>
+        <div class="f3-spec-row">
+          <div class="f3-spec-label">Shelf Life</div>
+          <div class="f3-spec-value-box">
+            <span class="f3-spec-val">Borosilicate Glass</span>
+            <span class="f3-spec-sub">Heavy-wall, heat-resistant</span>
+          </div>
+        </div>
+        <div class="f3-spec-row">
+          <div class="f3-spec-label">Free From</div>
+          <div class="f3-spec-value-box">
+            <span class="f3-spec-val">Borosilicate Glass</span>
+            <span class="f3-spec-sub">Heavy-wall, heat-resistant</span>
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Frame 3 Bottom Footer -->
+    <div class="f3-bottom-footer">
+      <div class="f3-bottom-left">Constituir • Glass Edition</div>
+      <div class="f3-bottom-center">Dermatologist Tested • Paraben-Free • Cruelty-Free • Made in India • Recyclable Glass</div>
+      <div class="f3-bottom-right">omnilux.com.in © Omnilux 2026</div>
     </div>
 
     <!-- Related Products -->

@@ -523,3 +523,32 @@ h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2}
   animation-duration: 0.6s;
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* === FRAME 3 SPECIFIC STYLING === */
+.f3-brand-bar { display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-bottom: 4rem; margin-top: 1rem; }
+.f3-brand-bar__line { height: 3px; width: 60px; background: var(--black); }
+.f3-brand-bar__text { font-family: var(--font); font-style: italic; font-weight: 800; font-size: 1.25rem; letter-spacing: .05em; }
+
+.product-info__title span { display: block; }
+.product-info__title span:nth-child(1) { font-size: clamp(2.5rem, 5vw, 3.5rem); }
+.product-info__title span:nth-child(3) { font-size: clamp(2.5rem, 5vw, 3.5rem); color: var(--black); }
+.product-info__title span:nth-child(5) { font-size: clamp(3rem, 6vw, 4.5rem); color: var(--black); }
+
+.f3-btn-add { background: #fdf6dc; color: var(--black); font-size: 1.15rem; font-weight: 700; font-style: italic; width: max-content; padding: 1rem 2.5rem; justify-content: flex-start; gap: 0.5rem; border-radius: var(--r-full); margin-top: 1.5rem; }
+.f3-btn-add:hover:not(:disabled) { background: #f5eab5; }
+
+.f3-gallery { position: relative; display: flex; align-items: center; justify-content: center; background: transparent; }
+.f3-gallery .product-gallery__main { background: transparent; z-index: 2; height: auto; }
+.f3-bg-glow { position: absolute; font-family: var(--font); font-weight: 900; font-size: 24vw; color: #edebea; letter-spacing: -0.05em; z-index: 0; user-select: none; pointer-events: none; top: 50%; left: 50%; transform: translate(-50%, -50%); white-space: nowrap; }
+
+.f3-specs { background: transparent; padding: 0; margin-top: 1rem; border-radius: 0; }
+.f3-spec-row { display: flex; align-items: flex-end; justify-content: space-between; border-bottom: 2px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 1rem; gap: 1rem; }
+.f3-spec-label { font-family: var(--font); font-style: italic; font-size: 1.2rem; font-weight: 600; color: #a4a4a4; padding-bottom: 2px; }
+.f3-spec-value-box { text-align: right; display: flex; flex-direction: column; }
+.f3-spec-val { font-size: .85rem; font-weight: 700; color: var(--black); }
+.f3-spec-sub { font-size: .8rem; font-style: italic; color: var(--text2); }
+
+.f3-bottom-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 1.5rem; margin-top: 4rem; flex-wrap: wrap; gap: 1rem; }
+.f3-bottom-left { font-family: var(--font); font-style: italic; font-weight: 700; font-size: 1.1rem; color: #9f9f9f; }
+.f3-bottom-center { font-size: .75rem; font-weight: 700; color: #929292; text-transform: uppercase; letter-spacing: 0.05em; }
+.f3-bottom-right { font-size: .75rem; font-weight: 700; color: var(--text2); }
