@@ -1,0 +1,241 @@
+# OMNILYX — SHOPIFY THEME DEPLOYMENT GUIDE
+# ==========================================
+
+## YOUR THEME IS 100% COMPLETE
+
+All files are at: C:\Users\sanju\Desktop\omnilyx\shopify\
+
+Theme structure created:
+  layouts/          → theme.liquid (master layout)
+  assets/           → theme.css + theme.js
+  config/           → settings_schema.json + settings_data.json
+  locales/          → en.default.json
+  sections/         → 17 sections (header, footer, hero, collection, product, cart, etc.)
+  snippets/         → product-card.liquid + product-json.liquid
+  templates/        → 11 templates (index, product, collection, cart, pages, customers)
+
+===========================================================================
+STEP 1: CREATE SHOPIFY ACCOUNT
+===========================================================================
+1. Go to https://shopify.com
+2. Click "Start free trial"
+3. Store name: omnilyx
+4. Your URL will be: omnilyx.myshopify.com
+5. Select Basic Plan after trial (Rs.1,994/month)
+
+===========================================================================
+STEP 2: UPLOAD YOUR THEME (ZIP METHOD)
+===========================================================================
+ON YOUR COMPUTER:
+  - Right-click: C:\Users\sanju\Desktop\omnilyx\shopify\
+  - Select: Send to → Compressed (zipped) folder
+  - Name it: omnilyx-theme.zip
+
+IN SHOPIFY ADMIN:
+  - Go to: Online Store → Themes
+  - Click: "Add theme" → "Upload zip file"
+  - Select: omnilyx-theme.zip
+  - Click Preview (check it looks correct)
+  - Click Publish (makes it live)
+
+--- OR USE SHOPIFY CLI ---
+  npm install -g @shopify/cli @shopify/theme
+  cd C:\Users\sanju\Desktop\omnilyx\shopify
+  shopify auth login --store omnilyx.myshopify.com
+  shopify theme push
+  shopify theme dev   (live preview while editing)
+
+===========================================================================
+STEP 3: ADD YOUR PRODUCTS
+===========================================================================
+Admin → Products → Add product
+
+Required fields:
+  Title:             Constituir Brightening Cream
+  Price:             699
+  Compare-at price:  999
+  Currency:          INR
+  Images:            Upload your product photos
+
+Special tags (populate product page automatically):
+  Ingredient pills:  Niacinamide 5%  |  Alpha Arbutin 2%  |  Vitamin C SAP 2%
+  Specs table:       Bottle:Borosilicate Glass  |  Volume:50 ml  |  Formula:pH 5.5-6.0
+
+===========================================================================
+STEP 4: CREATE COLLECTIONS (SIDEBAR CATEGORIES)
+===========================================================================
+Admin → Products → Collections → Create collection
+
+  Name               | Handle (MUST be exact)
+  -------------------|-------------------
+  SkinCare Product   | skincare
+  HairCare Product   | haircare
+  LipCare Product    | lipcare
+  Body Product       | body
+  HealthCare Product | healthcare
+  YourCare Product   | yourcare
+
+===========================================================================
+STEP 5: CONFIGURE NAVIGATION
+===========================================================================
+Admin → Online Store → Navigation → Main menu → Add links:
+
+  Home       → /
+  Shop All   → /collections/all
+  Skincare   → /collections/skincare
+  Haircare   → /collections/haircare
+  About      → /pages/about
+  Contact    → /pages/contact
+
+===========================================================================
+STEP 6: CREATE PAGES
+===========================================================================
+Admin → Online Store → Pages → Add page
+
+  Page Title          | Template to select
+  --------------------|-------------------
+  About               | page.about
+  Contact             | page.contact
+  FAQ                 | page
+  Shipping & Returns  | page
+  Privacy Policy      | (use Admin → Settings → Policies)
+  Refund Policy       | (use Admin → Settings → Policies)
+
+===========================================================================
+STEP 7: PAYMENT GATEWAY (RAZORPAY FOR INDIA)
+===========================================================================
+1. Sign up at https://razorpay.com
+2. Dashboard → Settings → API Keys → Generate Key
+3. Copy: Key ID + Key Secret
+
+In Shopify:
+  Admin → Settings → Payments → Third-party providers
+  Search: Razorpay → Install → Enter Key ID + Secret
+
+Supports: UPI, Visa, Mastercard, Net Banking, EMI, Paytm, PhonePe
+
+===========================================================================
+STEP 8: TAXES & SHIPPING
+===========================================================================
+TAXES (GST):
+  Admin → Settings → Taxes → India → Enable
+  Rate: 18% (standard) or 12% (goods < Rs.1000)
+
+SHIPPING:
+  Admin → Settings → Shipping and delivery → Add zone: India
+  - Free shipping: orders >= Rs.799
+  - Standard:      Rs.99  (3-5 days)
+  - Express:       Rs.199 (1-2 days)
+
+===========================================================================
+STEP 9: CONNECT CUSTOM DOMAIN
+===========================================================================
+1. Buy domain from GoDaddy/Namecheap (e.g., omnilux.com.in)
+2. Add these DNS records at your registrar:
+
+   Type  | Name | Value
+   ------|------|------------------------
+   A     | @    | 23.227.38.65
+   CNAME | www  | shops.myshopify.com
+
+3. Shopify Admin → Settings → Domains → Connect existing domain
+4. Enter: omnilux.com.in → Verify → Set as primary domain
+5. SSL certificate activates automatically (FREE)
+
+===========================================================================
+STEP 10: CUSTOMIZE THEME (SHOPIFY EDITOR)
+===========================================================================
+Admin → Online Store → Themes → Customize
+
+  Section        | What to configure
+  ---------------|------------------------------------------
+  Announcement   | Promo text + link
+  Hero           | Product image, title, price, tags, specs
+  Featured Coll  | Select a collection to feature
+  Testimonials   | Add 3-5 customer reviews with ratings
+  Newsletter     | Customize heading + button text
+  Footer         | Tagline, Instagram URL, social links
+
+===========================================================================
+STEP 11: INSTALL ESSENTIAL APPS
+===========================================================================
+Go to Shopify App Store and install:
+
+  App             | Purpose
+  ----------------|----------------------------------
+  Judge.me        | Product reviews with photos
+  Klaviyo         | Email marketing + abandon cart
+  Meta Pixel      | Facebook / Instagram ads
+  Google Analytics| Track visitors (GA4)
+  Shiprocket      | Indian courier management
+  Tidio           | Live chat on your store
+
+===========================================================================
+STEP 12: GOOGLE ANALYTICS
+===========================================================================
+1. Create GA4 at https://analytics.google.com
+2. Copy your Measurement ID (G-XXXXXXXXXX)
+3. Shopify: Admin → Online Store → Preferences
+4. Paste under Google Analytics
+
+===========================================================================
+STEP 13: GO LIVE FINAL CHECKLIST
+===========================================================================
+  [ ] Products added with images, prices, tags
+  [ ] Collections created + products assigned
+  [ ] Navigation menu configured
+  [ ] Payment gateway tested (Razorpay test mode)
+  [ ] Shipping rates set up
+  [ ] Domain connected + SSL active (green padlock)
+  [ ] Contact form sends email (test it)
+  [ ] Cart + Checkout works (test with Razorpay test card)
+  [ ] View on mobile phone (responsive)
+  [ ] Privacy Policy page created
+  [ ] Refund Policy page created
+  [ ] Google Analytics connected
+  [ ] Announcement bar text set
+
+===========================================================================
+CUSTOMIZATION QUICK REFERENCE
+===========================================================================
+
+  To change           | Edit this
+  --------------------|------------------------------------------
+  Brand colors        | assets/theme.css → :root { --gold }
+  Logo                | Theme Editor → Header → Upload logo
+  Homepage sections   | templates/index.json
+  Product page specs  | Product tags as "Label:Value"
+  Ingredient tags     | Product tags containing % or mg
+  Collection sidebar  | sections/collection-main.liquid
+  Hero specs panel    | Theme Editor → Hero section settings
+  Marquee text        | Theme Editor → Marquee Bar
+
+===========================================================================
+SHOPIFY CLI COMMANDS
+===========================================================================
+
+  shopify theme push --store omnilyx.myshopify.com    # Push changes live
+  shopify theme dev  --store omnilyx.myshopify.com    # Live preview
+  shopify theme pull --store omnilyx.myshopify.com    # Download live theme
+
+===========================================================================
+RAZORPAY TEST CARDS (for testing checkout)
+===========================================================================
+  Card Number:  4111 1111 1111 1111
+  Expiry:       Any future date
+  CVV:          Any 3 digits
+  UPI:          success@razorpay (test UPI ID)
+
+===========================================================================
+SUPPORT RESOURCES
+===========================================================================
+  Shopify Help:      https://help.shopify.com
+  Shopify Community: https://community.shopify.com
+  Liquid Reference:  https://shopify.dev/docs/api/liquid
+  Razorpay Docs:     https://razorpay.com/docs
+  Shiprocket:        https://shiprocket.in
+
+===========================================================================
+Omnilyx Theme v1.0 — Beauty. Wellness. Confidence.
+Built for omnilux.com.in
+===========================================================================
