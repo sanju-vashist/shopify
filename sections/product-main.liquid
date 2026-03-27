@@ -108,7 +108,8 @@
             <img id="MainProductImage"
                  src="{{ product.featured_image | image_url: width: 700 }}"
                  alt="{{ product.featured_image.alt | default: product.title }}"
-                 width="700" height="700" loading="eager">
+                 width="700" height="700" loading="eager"
+                 style="view-transition-name: product-main-image;">
           {%- else -%}
             {{ 'product-1' | placeholder_svg_tag: 'product-gallery__placeholder' }}
           {%- endif -%}

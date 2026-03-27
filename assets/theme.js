@@ -396,6 +396,22 @@ function initAnimations() {
   });
 }
 
+// ─── VIEW TRANSITIONS (ZOOM EFFECT) ──────────
+function initViewTransitions() {
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('.product-card__link') || e.target.closest('.product-card__title');
+    if (!link) return;
+    
+    const card = link.closest('.product-card');
+    if (!card) return;
+    
+    const img = card.querySelector('.product-card__img');
+    if (img) {
+      img.style.viewTransitionName = 'product-main-image';
+    }
+  });
+}
+
 // ─── INIT ─────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initStickyHeader();
@@ -407,4 +423,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initCartPage();
   initSmoothLinks();
   initAnimations();
+  initViewTransitions();
 });
