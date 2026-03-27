@@ -1,0 +1,6 @@
+{
+  "sections": {
+    "collection-main": { "type": "collection-main", "settings": { "enable_filtering": true, "enable_sorting": true } }
+  },
+  "order": ["collection-main"]
+}

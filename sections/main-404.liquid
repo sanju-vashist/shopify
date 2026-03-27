@@ -1,0 +1,17 @@
+<div class="error-page section">
+  <div class="container">
+    <div class="error-page__inner">
+      <div class="error-page__code">404</div>
+      <h1 class="error-page__title">Page Not Found</h1>
+      <p class="error-page__desc">The page you were looking for doesn't exist. It may have been moved or deleted.</p>
+      <div class="error-page__actions">
+        <a href="{{ routes.root_url }}" class="btn btn--primary btn--lg">Go Home →</a>
+        <a href="{{ routes.collections_url }}" class="btn btn--secondary btn--lg">Shop All Products</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{ "name": "404", "settings": [] }
+{% endschema %}

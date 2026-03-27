@@ -1,0 +1,74 @@
+<div class="account-page section">
+  <div class="container">
+    <div class="account-header">
+      <h1>My Account</h1>
+      <a href="{{ routes.account_logout_url }}" class="btn btn--secondary btn--sm">Logout</a>
+    </div>
+
+    <div class="account-grid">
+      <!-- Order History -->
+      <div class="account-orders">
+        <h2>Order History</h2>
+        {%- if customer.orders.size > 0 -%}
+          <div class="orders-table-wrap">
+            <table class="orders-table">
+              <thead>
+                <tr>
+                  <th>Order</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Total</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {%- for order in customer.orders -%}
+                  <tr>
+                    <td>{{ order.name }}</td>
+                    <td>{{ order.created_at | date: '%d %b %Y' }}</td>
+                    <td><span class="order-status order-status--{{ order.financial_status }}">{{ order.financial_status | capitalize }}</span></td>
+                    <td>{{ order.total_price | money }}</td>
+                    <td><a href="{{ order.customer_url }}" class="btn btn--secondary btn--sm">Details</a></td>
+                  </tr>
+                {%- endfor -%}
+              </tbody>
+            </table>
+          </div>
+        {%- else -%}
+          <div class="account-empty">
+            <p>No orders yet. Start shopping!</p>
+            <a href="{{ routes.collections_url }}" class="btn btn--primary">Shop Now →</a>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Account Details -->
+      <div class="account-details">
+        <h2>Account Details</h2>
+        <div class="account-info-card">
+          <p><strong>{{ customer.first_name }} {{ customer.last_name }}</strong></p>
+          <p>{{ customer.email }}</p>
+          <a href="{{ routes.account_url }}/addresses" class="btn btn--secondary btn--sm" style="margin-top:1rem">Manage Addresses</a>
+        </div>
+
+        <!-- Default Address -->
+        {%- if customer.default_address -%}
+          <div class="account-address-card">
+            <h3>Default Address</h3>
+            <address>
+              {{ customer.default_address.name }}<br>
+              {{ customer.default_address.address1 }}<br>
+              {%- if customer.default_address.address2 != blank -%}{{ customer.default_address.address2 }}<br>{%- endif -%}
+              {{ customer.default_address.city }}, {{ customer.default_address.province }} {{ customer.default_address.zip }}<br>
+              {{ customer.default_address.country }}
+            </address>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Account", "settings": [] }
+{% endschema %}

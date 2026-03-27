@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page_title }}{% unless page_title contains shop.name %} — {{ shop.name }}{% endunless %}</title>
+  {%- if page_description -%}<meta name="description" content="{{ page_description | escape }}">{%- endif -%}
+  <link rel="canonical" href="{{ canonical_url }}">
+  {{ content_for_header }}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,600;1,700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  <script>
+    document.documentElement.classList.remove('no-js');
+    window.theme = {
+      routes: {
+        root: '{{ routes.root_url }}',
+        cart: '{{ routes.cart_url | append: ".js" }}',
+        cartAdd: '{{ routes.cart_add_url | append: ".js" }}',
+        cartChange: '{{ routes.cart_change_url | append: ".js" }}',
+        search: '{{ routes.search_url }}'
+      },
+      moneyFormat: {{ shop.money_format | json }},
+      cartCount: {{ cart.item_count }},
+      strings: {
+        addToCart: {{ 'products.product.add_to_cart' | t | json }},
+        soldOut: {{ 'products.product.sold_out' | t | json }},
+        unavailable: {{ 'products.product.unavailable' | t | json }}
+      }
+    };
+  </script>
+</head>
+<body class="template-{{ template.name }}{% if customer %} customer-logged-in{% endif %}">
+  <a class="skip-to-content" href="#MainContent">Skip to content</a>
+
+  {% section 'announcement-bar' %}
+  {% section 'header' %}
+
+  <main id="MainContent" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+
+  <!-- Cart Drawer -->
+  <div id="CartDrawer" class="cart-drawer" aria-hidden="true" role="dialog">
+    <div class="cart-drawer__overlay" id="CartOverlay"></div>
+    <div class="cart-drawer__panel">
+      <div class="cart-drawer__head">
+        <h2>Your Bag <span id="CartCount">({{ cart.item_count }})</span></h2>
+        <button class="btn-icon" id="CartClose" aria-label="Close">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M1 1L17 17M17 1L1 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="cart-drawer__items" id="CartItems"></div>
+      <div class="cart-drawer__foot" id="CartFoot">
+        <div class="cart-drawer__subtotal">
+          <span>Subtotal</span>
+          <span id="CartSubtotal"></span>
+        </div>
+        <p class="cart-drawer__note">Taxes & shipping calculated at checkout</p>
+        <a href="/checkout" class="btn btn--primary btn--full">Checkout →</a>
+        <a href="{{ routes.cart_url }}" class="cart-drawer__full-link">View full bag</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Modal -->
+  <div id="SearchModal" class="search-modal" aria-hidden="true">
+    <div class="search-modal__overlay" id="SearchOverlay"></div>
+    <div class="search-modal__box">
+      <form action="{{ routes.search_url }}" method="get">
+        <input type="hidden" name="type" value="product">
+        <input type="text" name="q" id="SearchInput" placeholder="Search for products..." class="search-modal__input" autocomplete="off">
+        <button type="submit" class="search-modal__btn" aria-label="Search">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+      </form>
+      <button class="search-modal__close btn-icon" id="SearchClose" aria-label="Close">✕</button>
+    </div>
+  </div>
+
+  <div class="backdrop" id="Backdrop"></div>
+
+  {{ 'theme.js' | asset_url | script_tag }}
+</body>
+</html>

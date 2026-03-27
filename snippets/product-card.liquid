@@ -1,0 +1,70 @@
+{%- comment -%}
+  Renders a product card.
+  Parameters:
+    - product: {Object} Shopify product object
+    - show_badges: {Boolean} Show sale/new badges (default: true)
+{%- endcomment -%}
+
+{%- assign show_badges = show_badges | default: true -%}
+{%- assign show_vendor = show_vendor | default: false -%}
+
+<div class="product-card" data-product-id="{{ product.id }}">
+  <a href="{{ product.url }}" class="product-card__link" aria-label="{{ product.title }}">
+    <div class="product-card__media">
+      {%- if product.featured_image -%}
+        <img src="{{ product.featured_image | image_url: width: 600 }}"
+             alt="{{ product.featured_image.alt | default: product.title }}"
+             class="product-card__img"
+             width="600" height="600"
+             loading="lazy">
+        {%- if product.images.size > 1 -%}
+          <img src="{{ product.images[1] | image_url: width: 600 }}"
+               alt="{{ product.images[1].alt | default: product.title }}"
+               class="product-card__img product-card__img--hover"
+               width="600" height="600"
+               loading="lazy">
+        {%- endif -%}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'product-card__placeholder' }}
+      {%- endif -%}
+
+      {%- if show_badges -%}
+        <div class="product-card__badges">
+          {%- if product.compare_at_price > product.price -%}
+            <span class="badge badge--sale">
+              {%- assign pct = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+              −{{ pct }}%
+            </span>
+          {%- elsif product.created_at > 'now' | date: '%s' | minus: 2592000 | date: '%Y-%m-%dT%H:%M:%SZ' -%}
+            <span class="badge badge--new">New</span>
+          {%- endif -%}
+          {%- unless product.available -%}
+            <span class="badge badge--soldout">Sold Out</span>
+          {%- endunless -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </a>
+
+  <div class="product-card__body">
+    {%- if show_vendor and product.vendor != blank -%}
+      <p class="product-card__vendor">{{ product.vendor }}</p>
+    {%- endif -%}
+    <a href="{{ product.url }}" class="product-card__title">{{ product.title }}</a>
+    <div class="product-card__price-row">
+      {%- if product.compare_at_price > product.price -%}
+        <span class="product-card__price">{{ product.price | money }}</span>
+        <span class="product-card__price--compare">{{ product.compare_at_price | money }}</span>
+      {%- else -%}
+        <span class="product-card__price">{{ product.price | money }}</span>
+      {%- endif -%}
+    </div>
+    <button class="product-card__atc-btn"
+            data-product-url="{{ product.url }}"
+            data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+            {% unless product.available %}disabled{% endunless %}
+            aria-label="Add {{ product.title }} to bag">
+      {%- if product.available -%}Add to Bag{%- else -%}Sold Out{%- endif -%}
+    </button>
+  </div>
+</div>

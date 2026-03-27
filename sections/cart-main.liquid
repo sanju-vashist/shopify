@@ -1,0 +1,107 @@
+<div class="cart-page section">
+  <div class="container">
+    <h1 class="cart-page__title">Your Bag</h1>
+
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" id="CartPageForm">
+        <div class="cart-page__inner">
+          <!-- Cart Items -->
+          <div class="cart-items">
+            <div class="cart-items__header">
+              <span>Product</span>
+              <span>Price</span>
+              <span>Quantity</span>
+              <span>Total</span>
+            </div>
+
+            {%- for item in cart.items -%}
+              <div class="cart-item" data-line="{{ forloop.index }}">
+                <div class="cart-item__media">
+                  <a href="{{ item.url }}">
+                    <img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.image.alt | default: item.title }}" width="80" height="80" loading="lazy">
+                  </a>
+                </div>
+                <div class="cart-item__details">
+                  <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title }}</a>
+                  {%- if item.variant.title != 'Default Title' -%}
+                    <p class="cart-item__variant">{{ item.variant.title }}</p>
+                  {%- endif -%}
+                  <p class="cart-item__price--mobile">{{ item.price | money }}</p>
+                  <button type="button" class="cart-item__remove" data-line="{{ forloop.index }}">Remove</button>
+                </div>
+                <div class="cart-item__price">{{ item.price | money }}</div>
+                <div class="cart-item__qty">
+                  <div class="qty-control">
+                    <button type="button" class="qty-btn cart-qty-minus" data-line="{{ forloop.index }}" aria-label="Decrease">−</button>
+                    <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" class="qty-input cart-qty-input" data-line="{{ forloop.index }}" aria-label="Quantity">
+                    <button type="button" class="qty-btn cart-qty-plus" data-line="{{ forloop.index }}" aria-label="Increase">+</button>
+                  </div>
+                </div>
+                <div class="cart-item__total">{{ item.line_price | money }}</div>
+              </div>
+            {%- endfor -%}
+          </div>
+
+          <!-- Cart Summary -->
+          <div class="cart-summary">
+            <h2 class="cart-summary__title">Order Summary</h2>
+            <div class="cart-summary__rows">
+              <div class="cart-summary__row">
+                <span>Subtotal</span>
+                <span>{{ cart.total_price | money }}</span>
+              </div>
+              <div class="cart-summary__row">
+                <span>Shipping</span>
+                <span>Calculated at checkout</span>
+              </div>
+              {%- if cart.cart_level_discount_applications.size > 0 -%}
+                {%- for discount in cart.cart_level_discount_applications -%}
+                  <div class="cart-summary__row cart-summary__row--discount">
+                    <span>{{ discount.title }}</span>
+                    <span>−{{ discount.total_allocated_amount | money }}</span>
+                  </div>
+                {%- endfor -%}
+              {%- endif -%}
+            </div>
+
+            <!-- Discount Code -->
+            <div class="cart-discount">
+              <label for="CartDiscount">Discount code</label>
+              <div class="cart-discount__inner">
+                <input type="text" id="CartDiscount" name="discount" placeholder="Enter code" class="cart-discount__input">
+                <button type="submit" name="update" class="btn btn--secondary btn--sm">Apply</button>
+              </div>
+            </div>
+
+            <!-- Note -->
+            <div class="cart-note">
+              <label for="CartNote">Order note</label>
+              <textarea id="CartNote" name="note" rows="3" placeholder="Special instructions..." class="cart-note__textarea">{{ cart.note }}</textarea>
+            </div>
+
+            <div class="cart-summary__total">
+              <span>Total</span>
+              <span>{{ cart.total_price | money }}</span>
+            </div>
+            <p class="cart-summary__info">Taxes and shipping calculated at checkout</p>
+            <a href="/checkout" class="btn btn--primary btn--full btn--lg">Proceed to Checkout →</a>
+            <a href="{{ routes.collections_url }}" class="cart-continue">← Continue Shopping</a>
+          </div>
+        </div>
+      </form>
+    {%- else -%}
+      <div class="cart-empty">
+        <div class="cart-empty__icon">
+          <svg width="64" height="64" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </div>
+        <h2>Your bag is empty</h2>
+        <p>Looks like you haven't added any products yet.</p>
+        <a href="{{ routes.collections_url }}" class="btn btn--primary btn--lg">Shop Now →</a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Cart Main", "settings": [] }
+{% endschema %}

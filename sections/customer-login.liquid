@@ -1,0 +1,58 @@
+<div class="auth-page section">
+  <div class="container">
+    <div class="auth-box">
+      <h1 class="auth-box__title">Sign In</h1>
+      <p class="auth-box__sub">Welcome back to Omnilyx</p>
+
+      {% form 'customer_login', class: 'auth-form', id: 'LoginForm' %}
+        {%- if form.errors -%}
+          <div class="form-errors" role="alert">
+            {{ form.errors | default_errors }}
+          </div>
+        {%- endif -%}
+
+        <div class="form-field">
+          <label for="CustomerEmail">Email</label>
+          <input type="email" name="customer[email]" id="CustomerEmail" autocomplete="email" autocorrect="off" autocapitalize="off" placeholder="you@example.com" required>
+        </div>
+        <div class="form-field">
+          <label for="CustomerPassword">Password</label>
+          <input type="password" name="customer[password]" id="CustomerPassword" autocomplete="current-password" placeholder="Your password" required>
+        </div>
+
+        <div class="auth-form__forgot">
+          <a href="/account/login#recover">Forgot your password?</a>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--full">Sign In →</button>
+        <p class="auth-form__switch">Don't have an account? <a href="{{ routes.account_register_url }}">Create one</a></p>
+      {% endform %}
+
+      <!-- Password Recovery -->
+      <div id="RecoverForm" style="display:none">
+        <h2>Reset Password</h2>
+        {% form 'recover_customer_password', class: 'auth-form' %}
+          <div class="form-field">
+            <label for="RecoverEmail">Email address</label>
+            <input type="email" name="email" id="RecoverEmail" placeholder="you@example.com" required>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full">Send Reset Link</button>
+          <p class="auth-form__switch"><a href="{{ routes.account_login_url }}">← Back to login</a></p>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.location.hash === '#recover') {
+      document.getElementById('LoginForm').style.display = 'none';
+      document.getElementById('RecoverForm').style.display = 'block';
+    }
+  });
+</script>
+
+{% schema %}
+{ "name": "Login", "settings": [] }
+{% endschema %}

@@ -1,0 +1,122 @@
+<div class="collection-page">
+  <!-- Collection Header -->
+  <div class="collection-page__header container">
+    <div class="collection-header">
+      <div>
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="{{ routes.root_url }}">Home</a>
+          <span aria-hidden="true">›</span>
+          <span>{{ collection.title | default: 'All Products' }}</span>
+        </nav>
+        <h1 class="collection-header__title">{{ collection.title | default: 'Beauty. Wellness. Confidence.' }}</h1>
+        {%- if collection.description != blank -%}
+          <p class="collection-header__desc">{{ collection.description }}</p>
+        {%- endif -%}
+      </div>
+      <div class="collection-header__meta">
+        <span class="collection-count">{{ collection.products_count }} products</span>
+        <div class="collection-sort">
+          <label for="SortBy" class="sr-only">Sort by</label>
+          <select name="sort_by" id="SortBy" class="sort-select" onchange="window.location.search = '?sort_by=' + this.value">
+            {% assign current_sort = collection.sort_by | default: collection.default_sort_by %}
+            <option value="manual"{% if current_sort == 'manual' %} selected{% endif %}>Featured</option>
+            <option value="best-selling"{% if current_sort == 'best-selling' %} selected{% endif %}>Best Selling</option>
+            <option value="title-ascending"{% if current_sort == 'title-ascending' %} selected{% endif %}>A–Z</option>
+            <option value="title-descending"{% if current_sort == 'title-descending' %} selected{% endif %}>Z–A</option>
+            <option value="price-ascending"{% if current_sort == 'price-ascending' %} selected{% endif %}>Price: Low to High</option>
+            <option value="price-descending"{% if current_sort == 'price-descending' %} selected{% endif %}>Price: High to Low</option>
+            <option value="created-descending"{% if current_sort == 'created-descending' %} selected{% endif %}>Newest</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Layout: Sidebar + Grid -->
+  <div class="collection-page__inner container">
+    <!-- Sidebar -->
+    <aside class="collection-sidebar" id="CollectionSidebar" aria-label="Filters">
+      <!-- Categories -->
+      <div class="sidebar__section">
+        <h3 class="sidebar__title">Categories</h3>
+        <ul class="sidebar__cat-list">
+          <li><a href="/collections/all" class="sidebar__cat-link{% if collection.handle == 'all' %} active{% endif %}">All Products</a></li>
+          <li><a href="/collections/skincare" class="sidebar__cat-link{% if collection.handle == 'skincare' %} active{% endif %}">SkinCare Product</a></li>
+          <li><a href="/collections/haircare" class="sidebar__cat-link{% if collection.handle == 'haircare' %} active{% endif %}">HairCare Product</a></li>
+          <li><a href="/collections/lipcare" class="sidebar__cat-link{% if collection.handle == 'lipcare' %} active{% endif %}">LipCare Product</a></li>
+          <li><a href="/collections/body" class="sidebar__cat-link{% if collection.handle == 'body' %} active{% endif %}">Body Product</a></li>
+          <li><a href="/collections/healthcare" class="sidebar__cat-link{% if collection.handle == 'healthcare' %} active{% endif %}">HealthCare Product</a></li>
+          <li><a href="/collections/yourcare" class="sidebar__cat-link sidebar__cat-link--muted{% if collection.handle == 'yourcare' %} active{% endif %}">YourCare Product</a></li>
+        </ul>
+      </div>
+
+      <!-- Price Filter -->
+      <div class="sidebar__section">
+        <h3 class="sidebar__title">Price Range</h3>
+        <div class="sidebar__price-filter">
+          <form method="get" action="{{ request.path }}">
+            <div class="sidebar__price-inputs">
+              <input type="number" name="filter.v.price.gte" placeholder="Min ₹" class="sidebar__price-input" value="{{ current_filters | where: 'param_name', 'filter.v.price.gte' | map: 'value' | first }}">
+              <span>–</span>
+              <input type="number" name="filter.v.price.lte" placeholder="Max ₹" class="sidebar__price-input" value="{{ current_filters | where: 'param_name', 'filter.v.price.lte' | map: 'value' | first }}">
+            </div>
+            <button type="submit" class="btn btn--secondary btn--sm" style="width:100%;margin-top:0.75rem">Apply</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Active Filters -->
+      {%- if current_filters.size > 0 -%}
+        <div class="sidebar__section">
+          <h3 class="sidebar__title">Active Filters</h3>
+          <ul class="sidebar__active-filters">
+            {%- for filter in current_filters -%}
+              {%- for val in filter.active_values -%}
+                <li>
+                  <a href="{{ val.url_to_remove }}" class="sidebar__active-filter-remove">
+                    <span>{{ val.label }}</span> ✕
+                  </a>
+                </li>
+              {%- endfor -%}
+            {%- endfor -%}
+          </ul>
+          <a href="{{ collection.url }}" class="sidebar__clear-link">Clear all filters</a>
+        </div>
+      {%- endif -%}
+    </aside>
+
+    <!-- Product Grid -->
+    <div class="collection-main">
+      {%- paginate collection.products by 12 -%}
+        {%- if collection.products.size > 0 -%}
+          <div class="product-grid" id="ProductGrid">
+            {%- for product in collection.products -%}
+              {% render 'product-card', product: product %}
+            {%- endfor -%}
+          </div>
+
+          {%- if paginate.pages > 1 -%}
+            <div class="pagination">
+              {{ paginate | default_pagination | replace: '&laquo; Previous', '← Prev' | replace: 'Next &raquo;', 'Next →' }}
+            </div>
+          {%- endif -%}
+        {%- else -%}
+          <div class="collection-empty">
+            <p>No products found in this collection.</p>
+            <a href="/collections/all" class="btn btn--primary">Browse All Products</a>
+          </div>
+        {%- endif -%}
+      {%- endpaginate -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection Main",
+  "settings": [
+    { "type": "checkbox", "id": "enable_filtering", "label": "Enable filtering", "default": true },
+    { "type": "checkbox", "id": "enable_sorting", "label": "Enable sorting", "default": true }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,40 @@
+<div class="auth-page section">
+  <div class="container">
+    <div class="auth-box">
+      <h1 class="auth-box__title">Create Account</h1>
+      <p class="auth-box__sub">Join the Omnilyx community</p>
+
+      {% form 'create_customer', class: 'auth-form' %}
+        {%- if form.errors -%}
+          <div class="form-errors" role="alert">{{ form.errors | default_errors }}</div>
+        {%- endif -%}
+
+        <div class="form-row form-row--2col">
+          <div class="form-field">
+            <label for="FirstName">First name</label>
+            <input type="text" name="customer[first_name]" id="FirstName" autocomplete="given-name" placeholder="First name" value="{{ form.first_name }}">
+          </div>
+          <div class="form-field">
+            <label for="LastName">Last name</label>
+            <input type="text" name="customer[last_name]" id="LastName" autocomplete="family-name" placeholder="Last name" value="{{ form.last_name }}">
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="RegisterEmail">Email *</label>
+          <input type="email" name="customer[email]" id="RegisterEmail" autocomplete="email" placeholder="you@example.com" value="{{ form.email }}" required>
+        </div>
+        <div class="form-field">
+          <label for="RegisterPassword">Password *</label>
+          <input type="password" name="customer[password]" id="RegisterPassword" autocomplete="new-password" placeholder="Create a password" required>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--full">Create Account →</button>
+        <p class="auth-form__switch">Already have an account? <a href="{{ routes.account_login_url }}">Sign in</a></p>
+      {% endform %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Register", "settings": [] }
+{% endschema %}

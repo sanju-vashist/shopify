@@ -1,0 +1,30 @@
+{
+  "current": {
+    "show_announcement": true,
+    "announcement_text": "✦ Free shipping on orders above ₹799 ✦ Dermatologist Tested ✦ Cruelty-Free",
+    "announcement_link": "/collections/all",
+    "header_logo_text": "OMNILYX",
+    "show_cart_count": true,
+    "enable_sticky_header": true,
+    "hero_title": "Glass. Glow. Yours.",
+    "hero_subtitle": "OMNILYX · SKIN SCIENCE",
+    "hero_description": "Encased in heavy borosilicate glass. Brightening actives that go deep. A product that looks as good on your shelf as it works on your skin.",
+    "hero_button_label": "Shop Now",
+    "hero_button_link": "/collections/all",
+    "hero_link_label": "See all ingredients",
+    "featured_collection_title": "Featured Products",
+    "featured_collection": "",
+    "testimonials_title": "What our customers say",
+    "newsletter_title": "Join the Omnilyx Circle",
+    "newsletter_subtitle": "Get early access to new launches, exclusive offers & skincare tips.",
+    "footer_tagline": "Beauty. Wellness. Confidence.",
+    "social_instagram": "https://instagram.com/omnilyx",
+    "social_facebook": "",
+    "social_twitter": "",
+    "show_free_shipping_threshold": true,
+    "free_shipping_threshold": "799",
+    "accent_color": "#c9a84c",
+    "body_font": "Poppins, sans-serif"
+  },
+  "presets": {}
+}

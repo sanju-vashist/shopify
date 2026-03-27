@@ -1,0 +1,47 @@
+<section class="newsletter section">
+  <div class="container">
+    <div class="newsletter__inner">
+      <div class="newsletter__content">
+        <p class="section-eyebrow">{{ section.settings.eyebrow | default: 'Stay Connected' }}</p>
+        <h2 class="newsletter__title">{{ section.settings.title | default: 'Join the Omnilyx Circle' }}</h2>
+        <p class="newsletter__desc">{{ section.settings.description | default: 'Get early access to new launches, exclusive offers & skincare tips.' }}</p>
+      </div>
+      <div class="newsletter__form-wrap">
+        {% form 'customer', class: 'newsletter__form', id: 'NewsletterForm' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          {%- if form.posted_successfully? -%}
+            <p class="newsletter__success">✓ Thank you for subscribing!</p>
+          {%- else -%}
+            <div class="newsletter__input-group">
+              <input type="email" name="contact[email]" id="NewsletterEmail"
+                     placeholder="{{ section.settings.placeholder | default: 'Enter your email' }}"
+                     class="newsletter__input" required autocomplete="email">
+              <button type="submit" class="btn btn--primary newsletter__btn">
+                {{ section.settings.button_text | default: 'Subscribe' }}
+              </button>
+            </div>
+            {%- if form.errors -%}
+              <p class="newsletter__error">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+            {%- endif -%}
+            <p class="newsletter__disclaimer">By subscribing you agree to our Privacy Policy. Unsubscribe anytime.</p>
+          {%- endif -%}
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Stay Connected" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Join the Omnilyx Circle" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Get early access to new launches, exclusive offers & skincare tips." },
+    { "type": "text", "id": "placeholder", "label": "Input placeholder", "default": "Enter your email" },
+    { "type": "text", "id": "button_text", "label": "Button text", "default": "Subscribe" }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}

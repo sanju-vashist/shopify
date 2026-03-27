@@ -1,0 +1,54 @@
+{% assign col = section.settings.collection %}
+{% if col != blank %}
+  {% assign products = col.products | limit: section.settings.products_to_show %}
+{% else %}
+  {% assign products = collections.all.products | limit: section.settings.products_to_show %}
+{% endif %}
+
+<section class="featured-collection section">
+  <div class="container">
+    <div class="section-header">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="section-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="section-title">{{ section.settings.title }}</h2>
+      {%- if section.settings.show_view_all -%}
+        <a href="{{ col.url | default: '/collections/all' }}" class="section-link">View All →</a>
+      {%- endif -%}
+    </div>
+
+    <div class="product-grid product-grid--{{ section.settings.columns }}">
+      {%- for product in products -%}
+        {% render 'product-card', product: product %}
+      {%- else -%}
+        {%- for i in (1..section.settings.products_to_show) -%}
+          <div class="product-card">
+            <div class="product-card__media product-card__media--placeholder">
+              {{ 'product-' | append: i | placeholder_svg_tag: 'product-card__placeholder-svg' }}
+            </div>
+            <div class="product-card__body">
+              <p class="product-card__title">Sample Product {{ i }}</p>
+              <p class="product-card__price">₹699</p>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow label", "default": "Best Sellers" },
+    { "type": "text", "id": "title", "label": "Section title", "default": "Featured Products" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "products_to_show", "min": 2, "max": 12, "step": 1, "default": 6, "label": "Products to show" },
+    { "type": "select", "id": "columns", "label": "Columns", "options": [{"value":"2","label":"2"},{"value":"3","label":"3"},{"value":"4","label":"4"}], "default": "3" },
+    { "type": "checkbox", "id": "show_view_all", "label": "Show 'View All' link", "default": true }
+  ],
+  "presets": [{ "name": "Featured Collection" }]
+}
+{% endschema %}

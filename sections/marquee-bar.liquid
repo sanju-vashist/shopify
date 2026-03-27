@@ -1,0 +1,23 @@
+<section class="marquee-bar">
+  <div class="marquee-bar__inner">
+    <div class="marquee-bar__track">
+      {%- assign items = section.settings.items | split: '|' -%}
+      {%- for i in (1..4) -%}
+        {%- for item in items -%}
+          <span class="marquee-bar__item"><span class="marquee-bar__dot">◆</span>{{ item | strip }}</span>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marquee Bar",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "items", "label": "Items (separated by |)", "default": "Dermatologist Tested | Paraben-Free | Cruelty-Free | Made in India | Recyclable Glass | Women-Led Brand" }
+  ],
+  "presets": [{ "name": "Marquee Bar" }]
+}
+{% endschema %}

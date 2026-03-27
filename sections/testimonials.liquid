@@ -1,0 +1,64 @@
+<section class="testimonials section section--bg">
+  <div class="container">
+    <div class="section-header section-header--center">
+      <p class="section-eyebrow">{{ section.settings.eyebrow | default: 'Real Results' }}</p>
+      <h2 class="section-title">{{ section.settings.title | default: 'What Our Customers Say' }}</h2>
+    </div>
+
+    <div class="testimonials__grid">
+      {%- for block in section.blocks -%}
+        <div class="testimonial-card" {{ block.shopify_attributes }}>
+          <div class="testimonial-card__stars">
+            {%- assign rating = block.settings.rating | default: 5 -%}
+            {%- for i in (1..5) -%}
+              {%- if i <= rating -%}★{%- else -%}☆{%- endif -%}
+            {%- endfor -%}
+          </div>
+          <p class="testimonial-card__text">"{{ block.settings.review }}"</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">{{ block.settings.name | slice: 0 }}</div>
+            <div>
+              <p class="testimonial-card__name">{{ block.settings.name }}</p>
+              <p class="testimonial-card__location">{{ block.settings.location }}</p>
+            </div>
+          </div>
+          {%- if block.settings.product_used != blank -%}
+            <p class="testimonial-card__product">Verified: {{ block.settings.product_used }}</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Real Results" },
+    { "type": "text", "id": "title", "label": "Title", "default": "What Our Customers Say" }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        { "type": "range", "id": "rating", "min": 1, "max": 5, "step": 1, "default": 5, "label": "Rating" },
+        { "type": "textarea", "id": "review", "label": "Review text", "default": "Skin glows for real! I noticed a difference in just 2 weeks." },
+        { "type": "text", "id": "name", "label": "Customer name", "default": "Priya S." },
+        { "type": "text", "id": "location", "label": "Location", "default": "Delhi" },
+        { "type": "text", "id": "product_used", "label": "Product used", "default": "Constituir Brightening Cream" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Testimonials",
+    "blocks": [
+      { "type": "testimonial", "settings": { "name": "Priya S.", "location": "Delhi", "review": "Skin glows for real! Noticed a difference in just 2 weeks of use.", "rating": 5 } },
+      { "type": "testimonial", "settings": { "name": "Aisha M.", "location": "Mumbai", "review": "Spots faded in 3 weeks! The glass bottle is gorgeous on my shelf.", "rating": 5 } },
+      { "type": "testimonial", "settings": { "name": "Riya K.", "location": "Bangalore", "review": "Best skincare brand I've tried. Clean formula, beautiful packaging.", "rating": 5 } }
+    ]
+  }]
+}
+{% endschema %}

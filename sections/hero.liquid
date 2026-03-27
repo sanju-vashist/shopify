@@ -1,0 +1,118 @@
+<section class="hero" id="Hero">
+  <div class="hero__content">
+    <div class="hero__eyebrow">
+      <span class="hero__eyebrow-line"></span>
+      <span>{{ section.settings.eyebrow | default: 'OMNILYX · SKIN SCIENCE' }}</span>
+      <span class="hero__eyebrow-line"></span>
+    </div>
+
+    <h1 class="hero__title">
+      {%- assign title_parts = section.settings.title | split: '.' -%}
+      {%- for part in title_parts -%}
+        {%- unless part == blank -%}
+          <span class="hero__title-line{% cycle '', ' hero__title-accent', ' hero__title-outline' %}">{{ part }}.</span>
+        {%- endunless -%}
+      {%- endfor -%}
+    </h1>
+
+    <p class="hero__desc">{{ section.settings.description }}</p>
+
+    <div class="hero__tags">
+      {%- assign tags = section.settings.ingredient_tags | split: ',' -%}
+      {%- for tag in tags -%}
+        <span class="hero__tag"><span class="hero__tag-dot"></span>{{ tag | strip }}</span>
+      {%- endfor -%}
+    </div>
+
+    <div class="hero__price-block">
+      <span class="hero__price">{{ section.settings.hero_price }}</span>
+      {%- if section.settings.hero_compare_price != blank -%}
+        <span class="hero__price-compare">{{ section.settings.hero_compare_price }}</span>
+        <span class="hero__sale-badge">{{ section.settings.sale_badge | default: '30% OFF' }}</span>
+      {%- endif -%}
+    </div>
+
+    <div class="hero__actions">
+      <a href="{{ section.settings.button_link | default: '/collections/all' }}" class="btn btn--primary btn--lg">
+        {{ section.settings.button_label | default: 'Add to Bag' }} →
+      </a>
+      {%- if section.settings.secondary_link != blank -%}
+        <a href="{{ section.settings.secondary_link_url }}" class="hero__link-secondary">
+          {{ section.settings.secondary_link }} ↓
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="hero__image-wrap">
+    <div class="hero__bg-text" aria-hidden="true">GLOW</div>
+    {%- if section.settings.product_image != blank -%}
+      <img src="{{ section.settings.product_image | image_url: width: 700 }}"
+           alt="{{ section.settings.product_image.alt | default: shop.name }}"
+           class="hero__product-img"
+           width="700" height="auto"
+           loading="eager">
+    {%- else -%}
+      <div class="hero__product-placeholder">
+        {{ 'product-1' | placeholder_svg_tag: 'hero__placeholder-svg' }}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.show_specs -%}
+  <div class="hero__specs">
+    {%- assign spec_labels = section.settings.spec_labels | split: ',' -%}
+    {%- assign spec_values = section.settings.spec_values | split: ',' -%}
+    {%- assign spec_subs   = section.settings.spec_subs   | split: ',' -%}
+    {%- for label in spec_labels -%}
+      <div class="hero__spec-row">
+        <span class="hero__spec-label">{{ label | strip }}</span>
+        <div>
+          <div class="hero__spec-value">{{ spec_values[forloop.index0] | strip }}</div>
+          {%- if spec_subs[forloop.index0] != blank -%}
+            <div class="hero__spec-sub">{{ spec_subs[forloop.index0] | strip }}</div>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+  {%- endif -%}
+
+  <div class="hero__bottom">
+    <span class="hero__bottom-brand">{{ section.settings.product_subtitle | default: 'Constituir · Glass Edition' }}</span>
+    <div class="hero__trust-items">
+      <span>◆ Dermatologist Tested</span>
+      <span>◆ Paraben-Free</span>
+      <span>◆ Cruelty-Free</span>
+      <span>◆ Made in India</span>
+    </div>
+    <span class="hero__bottom-site">{{ shop.domain }}</span>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow text", "default": "OMNILYX · SKIN SCIENCE" },
+    { "type": "text", "id": "title", "label": "Hero title", "default": "Glass.Glow.Yours." },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Encased in heavy borosilicate glass. Brightening actives that go deep." },
+    { "type": "text", "id": "ingredient_tags", "label": "Ingredient tags (comma-separated)", "default": "Niacinamide 5%, Alpha Arbutin 2%, Vitamin C SAP 2%, Glutathione" },
+    { "type": "text", "id": "hero_price", "label": "Price display", "default": "₹699" },
+    { "type": "text", "id": "hero_compare_price", "label": "Compare-at price", "default": "₹999" },
+    { "type": "text", "id": "sale_badge", "label": "Sale badge text", "default": "30% OFF" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Add to Bag" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "text", "id": "secondary_link", "label": "Secondary link label", "default": "See all ingredients" },
+    { "type": "url", "id": "secondary_link_url", "label": "Secondary link URL" },
+    { "type": "image_picker", "id": "product_image", "label": "Hero product image" },
+    { "type": "text", "id": "product_subtitle", "label": "Product subtitle", "default": "Constituir · Glass Edition" },
+    { "type": "checkbox", "id": "show_specs", "label": "Show product specs panel", "default": true },
+    { "type": "textarea", "id": "spec_labels", "label": "Spec labels (comma-separated)", "default": "Bottle,Pump,Label,Volume,Formula,Finish,Shelf Life,Free From" },
+    { "type": "textarea", "id": "spec_values", "label": "Spec values (comma-separated)", "default": "Borosilicate Glass,Gold Anodized Zinc,Frosted BOPP Film,50 ml / 1.69 fl. oz.,pH 5.5 – 6.0,Non-greasy fast-absorb,24 months,Clean Formula" },
+    { "type": "textarea", "id": "spec_subs", "label": "Spec subtitles (comma-separated)", "default": "Heavy-wall heat-resistant,Airless pump 0.3ml per press,Gold foil mandala · Spot UV,~166 pump presses,Niacinamide · Arbutin · Vit C,All skin types · AM & PM,MFG 03/2026 · PAO 12M,No parabens · No sulphates" }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}

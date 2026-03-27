@@ -1,0 +1,207 @@
+<div class="product-page">
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span>›</span>
+      {%- if product.collections.first -%}
+        <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
+        <span>›</span>
+      {%- endif -%}
+      <span>{{ product.title }}</span>
+    </nav>
+
+    <!-- Brand Header Bar -->
+    <div class="product-brand-bar">
+      <div class="product-brand-bar__line"></div>
+      <span class="product-brand-bar__text">OMNILYX · SKINCARE</span>
+      <div class="product-brand-bar__line"></div>
+    </div>
+
+    <!-- Product Layout -->
+    <div class="product-layout">
+
+      <!-- LEFT: Product Info -->
+      <div class="product-info">
+        <div class="product-info__bg-text" aria-hidden="true">{{ product.type | upcase | default: 'GLOW' }}</div>
+        <h1 class="product-info__title">{{ product.title }}</h1>
+        <p class="product-info__desc">{{ product.description | strip_html | truncate: 200 }}</p>
+
+        <!-- Ingredient Tags -->
+        {%- if product.tags.size > 0 -%}
+          <div class="product-info__tags">
+            {%- for tag in product.tags -%}
+              {%- if tag contains '%' or tag contains 'mg' -%}
+                <span class="ingredient-tag">{{ tag }}</span>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        <!-- Price -->
+        <div class="product-info__price-wrap">
+          {%- if product.compare_at_price > product.price -%}
+            <span class="product-price">{{ product.price | money }}</span>
+            <span class="product-price--compare">{{ product.compare_at_price | money }}</span>
+            <span class="sale-badge">
+              {% assign savings = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price %}
+              {{ savings }}% OFF
+            </span>
+          {%- else -%}
+            <span class="product-price">{{ product.price | money }}</span>
+          {%- endif -%}
+        </div>
+
+        <!-- Add to Cart Form -->
+        <form action="{{ routes.cart_add_url }}" method="post" id="ProductForm" data-product-id="{{ product.id }}">
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" id="VariantId">
+
+          {%- unless product.has_only_default_variant -%}
+            {%- for option in product.options_with_values -%}
+              <div class="product-option">
+                <label class="product-option__label">{{ option.name }}</label>
+                <div class="product-option__values">
+                  {%- for value in option.values -%}
+                    <button type="button" class="variant-btn{% if option.selected_value == value %} selected{% endif %}"
+                            data-option-name="{{ option.name }}" data-value="{{ value }}">
+                      {{ value }}
+                    </button>
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endunless -%}
+
+          <!-- Quantity -->
+          <div class="product-qty">
+            <label class="product-qty__label">Quantity</label>
+            <div class="qty-control">
+              <button type="button" class="qty-btn" id="QtyMinus" aria-label="Decrease">−</button>
+              <input type="number" name="quantity" id="QtyInput" value="1" min="1" class="qty-input" aria-label="Quantity">
+              <button type="button" class="qty-btn" id="QtyPlus" aria-label="Increase">+</button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-add-to-cart" id="AddToCart"
+                  {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
+            {%- if product.selected_or_first_available_variant.available -%}
+              Add to Bag →
+            {%- else -%}
+              Sold Out
+            {%- endif -%}
+          </button>
+
+          <div class="product-trust-row">
+            <span>✓ Free shipping above ₹799</span>
+            <span>✓ Dermatologist Tested</span>
+            <span>✓ 30-day returns</span>
+            <span>✓ Authentic product</span>
+          </div>
+        </form>
+      </div>
+
+      <!-- CENTER: Gallery -->
+      <div class="product-gallery" id="ProductGallery">
+        <div class="product-gallery__main">
+          {%- if product.featured_image -%}
+            <img id="MainProductImage"
+                 src="{{ product.featured_image | image_url: width: 700 }}"
+                 alt="{{ product.featured_image.alt | default: product.title }}"
+                 width="700" height="700" loading="eager">
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'product-gallery__placeholder' }}
+          {%- endif -%}
+        </div>
+        {%- if product.images.size > 1 -%}
+          <div class="product-gallery__thumbs">
+            {%- for image in product.images -%}
+              <button class="product-gallery__thumb{% if forloop.first %} active{% endif %}"
+                      data-src="{{ image | image_url: width: 700 }}"
+                      data-full="{{ image | image_url: width: 1200 }}"
+                      aria-label="Product image {{ forloop.index }}">
+                <img src="{{ image | image_url: width: 120 }}" alt="{{ image.alt }}" width="120" height="120" loading="lazy">
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- RIGHT: Product Specs -->
+      <div class="product-specs">
+        <h3 class="product-specs__title">Product Details</h3>
+        <div class="product-specs__table">
+          {%- if product.vendor != blank -%}
+            <div class="spec-row"><span class="spec-label">Brand</span><div><span class="spec-value">{{ product.vendor }}</span></div></div>
+          {%- endif -%}
+          {%- if product.type != blank -%}
+            <div class="spec-row"><span class="spec-label">Type</span><div><span class="spec-value">{{ product.type }}</span></div></div>
+          {%- endif -%}
+          {%- if product.selected_or_first_available_variant.sku != blank -%}
+            <div class="spec-row"><span class="spec-label">SKU</span><div><span class="spec-value">{{ product.selected_or_first_available_variant.sku }}</span></div></div>
+          {%- endif -%}
+          <div class="spec-row"><span class="spec-label">Availability</span>
+            <div><span class="spec-value{% if product.available %} spec-value--in-stock{% else %} spec-value--oos{% endif %}">
+              {{ product.available | yesno: 'In Stock', 'Out of Stock' }}
+            </span></div>
+          </div>
+          {%- for tag in product.tags -%}
+            {%- if tag contains ':' -%}
+              {%- assign kv = tag | split: ':' -%}
+              <div class="spec-row">
+                <span class="spec-label">{{ kv[0] | strip }}</span>
+                <div><span class="spec-value">{{ kv[1] | strip }}</span></div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        <!-- Full Description -->
+        {%- if product.description != blank -%}
+          <details class="product-details-accordion">
+            <summary>Full Description</summary>
+            <div class="product-details-accordion__content">{{ product.description }}</div>
+          </details>
+        {%- endif -%}
+
+        <!-- Reviews placeholder -->
+        <div class="product-reviews-mini">
+          <div class="product-review-item">
+            <div class="review-stars">★★★★★</div>
+            <p>"Skin glows for real!"</p>
+            <span>– Priya, Delhi</span>
+          </div>
+          <div class="product-review-item">
+            <div class="review-stars">★★★★★</div>
+            <p>"Spots faded in 3 wks"</p>
+            <span>– Aisha, Mumbai</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Products -->
+    {%- if product.related_products.size > 0 -%}
+      <div class="related-products">
+        <h2 class="related-products__title">You Might Also Like</h2>
+        <div class="product-grid product-grid--4">
+          {%- for rel in product.related_products limit: 4 -%}
+            {% render 'product-card', product: rel %}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Main",
+  "settings": [
+    { "type": "checkbox", "id": "show_vendor", "label": "Show vendor", "default": true },
+    { "type": "checkbox", "id": "show_specs", "label": "Show specs panel", "default": true },
+    { "type": "checkbox", "id": "show_related", "label": "Show related products", "default": true }
+  ]
+}
+{% endschema %}

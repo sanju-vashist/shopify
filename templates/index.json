@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "hero": { "type": "hero", "settings": {} },
+    "marquee": { "type": "marquee-bar", "settings": {} },
+    "featured": { "type": "featured-collection", "settings": { "title": "Best Sellers", "eyebrow": "Fan Favourites", "products_to_show": 6, "columns": "3", "show_view_all": true } },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "t1": { "type": "testimonial", "settings": { "name": "Priya S.", "location": "Delhi", "review": "Skin glows for real! Noticed a difference in just 2 weeks of use.", "rating": 5, "product_used": "Constituir Brightening Cream" } },
+        "t2": { "type": "testimonial", "settings": { "name": "Aisha M.", "location": "Mumbai", "review": "Spots faded in 3 weeks! The glass bottle is gorgeous on my shelf.", "rating": 5, "product_used": "Constituir Brightening Cream" } },
+        "t3": { "type": "testimonial", "settings": { "name": "Riya K.", "location": "Bangalore", "review": "Clean formula, beautiful packaging. Best skincare I've tried.", "rating": 5, "product_used": "Constituir Brightening Cream" } }
+      },
+      "block_order": ["t1","t2","t3"],
+      "settings": {}
+    },
+    "newsletter": { "type": "newsletter", "settings": {} }
+  },
+  "order": ["hero", "marquee", "featured", "testimonials", "newsletter"]
+}
