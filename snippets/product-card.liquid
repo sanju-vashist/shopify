@@ -30,12 +30,14 @@
 
       {%- if show_badges -%}
         <div class="product-card__badges">
+          {%- assign date_now = 'now' | date: '%s' | minus: 2592000 -%}
+          {%- assign product_date = product.created_at | date: '%s' | plus: 0 -%}
           {%- if product.compare_at_price > product.price -%}
             <span class="badge badge--sale">
-              {%- assign pct = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+              {%- assign pct = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
               −{{ pct }}%
             </span>
-          {%- elsif product.created_at > 'now' | date: '%s' | minus: 2592000 | date: '%Y-%m-%dT%H:%M:%SZ' -%}
+          {%- elsif product_date > date_now -%}
             <span class="badge badge--new">New</span>
           {%- endif -%}
           {%- unless product.available -%}
