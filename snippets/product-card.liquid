@@ -48,11 +48,17 @@
     </div>
   </a>
 
-  <div class="product-card__body">
+    <div class="product-card__body">
     {%- if show_vendor and product.vendor != blank -%}
       <p class="product-card__vendor">{{ product.vendor }}</p>
     {%- endif -%}
     <a href="{{ product.url }}" class="product-card__title">{{ product.title }}</a>
+    
+    <div class="product-card__rating">
+      <span class="product-card__stars">★★★★☆</span>
+      <span class="product-card__rating-count">(12)</span>
+    </div>
+
     <div class="product-card__price-row">
       {%- if product.compare_at_price > product.price -%}
         <span class="product-card__price">{{ product.price | money }}</span>

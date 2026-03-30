@@ -89,7 +89,7 @@
     <div class="collection-main">
       {%- paginate collection.products by 12 -%}
         {%- if collection.products.size > 0 -%}
-          <div class="product-grid" id="ProductGrid">
+          <div class="product-grid product-grid--4" id="ProductGrid">
             {%- for product in collection.products -%}
               {% render 'product-card', product: product %}
             {%- endfor -%}
