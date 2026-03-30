@@ -289,7 +289,7 @@ function initProductPage() {
       }
       // Update price
       const priceEl = $('.product-price');
-      if (prizeEl && variant.price) priceEl.textContent = formatMoney(variant.price);
+      if (priceEl && variant.price) priceEl.textContent = formatMoney(variant.price);
     }
   }
 
@@ -384,15 +384,17 @@ function initAnimations() {
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
+        entry.target.classList.add('in-view', 'animated');
         obs.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.1 });
 
-  $$('.product-card, .testimonial-card, .about-pillar, .section-header').forEach(el => {
-    el.classList.add('fade-up');
-    obs.observe(el);
+  $$('.product-card, .testimonial-card, .about-pillar, .section-header, [data-animate]').forEach(el => {
+    if (!el.classList.contains('in-view')) {
+      el.classList.add('fade-up');
+      obs.observe(el);
+    }
   });
 }
 

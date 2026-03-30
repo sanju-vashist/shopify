@@ -8,9 +8,9 @@
           <span aria-hidden="true">›</span>
           <span>{{ collection.title | default: 'All Products' }}</span>
         </nav>
-        <h1 class="collection-header__title">{{ collection.title | default: 'Beauty. Wellness. Confidence.' }}</h1>
+        <h1 class="collection-header__title">{{ collection.title | default: 'The Collection' }}</h1>
         {%- if collection.description != blank -%}
-          <p class="collection-header__desc">{{ collection.description }}</p>
+          <p class="collection-header__desc" data-animate="fade-up">{{ collection.description }}</p>
         {%- endif -%}
       </div>
       <div class="collection-header__meta">
@@ -67,7 +67,7 @@
 
       <!-- Active Filters -->
       {%- if current_filters.size > 0 -%}
-        <div class="sidebar__section">
+        <div class="sidebar__section" style="margin-bottom: 2rem;">
           <h3 class="sidebar__title">Active Filters</h3>
           <ul class="sidebar__active-filters">
             {%- for filter in current_filters -%}
@@ -91,7 +91,61 @@
         {%- if collection.products.size > 0 -%}
           <div class="product-grid product-grid--4" id="ProductGrid">
             {%- for product in collection.products -%}
-              {% render 'product-card', product: product %}
+              <div class="product-card" data-product-id="{{ product.id }}" data-animate="fade-up">
+                <a href="{{ product.url }}" class="product-card__link" aria-label="{{ product.title }}">
+                  <div class="product-card__media">
+                    {%- if product.featured_image -%}
+                      <img src="{{ product.featured_image | image_url: width: 600 }}"
+                           alt="{{ product.featured_image.alt | default: product.title }}"
+                           class="product-card__img"
+                           width="600" height="600"
+                           loading="lazy">
+                      {%- if product.images.size > 1 -%}
+                        <img src="{{ product.images[1] | image_url: width: 600 }}"
+                             alt="{{ product.images[1].alt | default: product.title }}"
+                             class="product-card__img product-card__img--hover"
+                             width="600" height="600"
+                             loading="lazy">
+                      {%- endif -%}
+                    {%- else -%}
+                      {{ 'product-1' | placeholder_svg_tag: 'product-card__placeholder' }}
+                    {%- endif -%}
+
+                    {%- if show_badges -%}
+                      <div class="product-card__badges">
+                        {%- assign date_now = 'now' | date: '%s' | minus: 2592000 -%}
+                        {%- if product.compare_at_price > product.price -%}
+                          <span class="badge badge--sale">
+                            {%- assign pct = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+                            −{{ pct }}%
+                          </span>
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                </a>
+
+                <div class="product-card__body">
+                  {%- if show_vendor and product.vendor != blank -%}
+                    <p class="product-card__vendor">{{ product.vendor }}</p>
+                  {%- endif -%}
+                  <a href="{{ product.url }}" class="product-card__title">{{ product.title }}</a>
+                  
+                  <div class="product-card__rating">
+                    <span class="product-card__stars">★★★★★</span>
+                    <span class="product-card__rating-count">(12)</span>
+                  </div>
+
+                  <div class="product-card__price-row">
+                    {%- if product.compare_at_price > product.price -%}
+                      <span class="product-card__price">{{ product.price | money }}</span>
+                      <span class="product-card__price--compare">{{ product.compare_at_price | money }}</span>
+                    {%- else -%}
+                      <span class="product-card__price">{{ product.price | money }}</span>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </div>
             {%- endfor -%}
           </div>
 
