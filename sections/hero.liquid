@@ -1,277 +1,354 @@
 {% style %}
-.f3-wrapper {
-  background: var(--bg2); /* Subtle light blue background */
-  padding: clamp(0.5rem, 2vw, 2rem);
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  .f3-wrapper {
+    background: var(--bg2); /* Subtle light blue background */
+    padding: clamp(0.5rem, 2vw, 2rem);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-.f3-card {
-  background: var(--white);
-  border-radius: var(--r-xl);
-  width: 100%;
-  max-width: var(--max);
-  min-height: min(90vh, 1000px);
-  padding: clamp(1.5rem, 4vw, 3.5rem);
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
-  box-shadow: var(--sh-lg);
-}
+  .f3-card {
+    background: var(--white);
+    border-radius: var(--r-xl);
+    width: 100%;
+    max-width: var(--max);
+    min-height: min(90vh, 1000px);
+    padding: clamp(1.5rem, 4vw, 3.5rem);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--sh-lg);
+  }
 
-.f3-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: clamp(1.5rem, 4vh, 3rem);
-  position: relative;
-  z-index: 20;
-}
+  .f3-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: clamp(1.5rem, 4vh, 3rem);
+    position: relative;
+    z-index: 20;
+  }
 
-.f3-brand-group {
-  display: flex;
-  align-items: center;
-  gap: clamp(0.75rem, 2vw, 1.5rem);
-}
+  .f3-brand-group {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.75rem, 2vw, 1.5rem);
+  }
 
-.f3-brand-line {
-  width: clamp(40px, 8vw, 80px);
-  height: 3px;
-  background: var(--black);
-}
+  .f3-brand-line {
+    width: clamp(40px, 8vw, 80px);
+    height: 3px;
+    background: var(--black);
+  }
 
-.f3-brand-text {
-  font-size: clamp(1.1rem, 2vw, 1.4rem);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
+  .f3-brand-text {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
 
-.f3-brand-text span:first-child { font-weight: 800; font-style: italic; }
-.f3-brand-text span:last-child { font-weight: 500; opacity: 0.6; }
+  .f3-brand-text span:first-child {
+    font-weight: 800;
+    font-style: italic;
+  }
+  .f3-brand-text span:last-child {
+    font-weight: 500;
+    opacity: 0.6;
+  }
 
-.f3-menu-icon {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 6px;
-  cursor: pointer;
-}
+  .f3-menu-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    cursor: pointer;
+  }
 
-.f3-menu-icon div { height: 2px; background: var(--black); transition: width var(--t); }
-.f3-menu-icon div:first-child { width: 32px; }
-.f3-menu-icon div:last-child { width: 20px; }
-.f3-menu-icon:hover div:last-child { width: 32px; }
+  .f3-menu-icon div {
+    height: 2px;
+    background: var(--black);
+    transition: width var(--t);
+  }
+  .f3-menu-icon div:first-child {
+    width: 32px;
+  }
+  .f3-menu-icon div:last-child {
+    width: 20px;
+  }
+  .f3-menu-icon:hover div:last-child {
+    width: 32px;
+  }
 
-.f3-content-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr 1fr;
-  gap: 2rem;
-  flex: 1;
-  position: relative;
-  z-index: 10;
-  align-items: center;
-}
+  .f3-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    gap: 2rem;
+    flex: 1;
+    position: relative;
+    z-index: 10;
+    align-items: center;
+  }
 
-.f3-left-col { display: flex; flex-direction: column; justify-content: center; z-index: 5; }
+  .f3-left-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 5;
+  }
 
-.f3-title {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.05;
-  margin-bottom: 1.5rem;
-}
+  .f3-title {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+  }
 
-.f3-title-word {
-  font-weight: 900;
-  font-style: italic;
-  font-size: clamp(2.5rem, 6vw, 4.2rem);
-  color: var(--black);
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-}
+  .f3-title-word {
+    font-weight: 900;
+    font-style: italic;
+    font-size: clamp(2.5rem, 6vw, 4.2rem);
+    color: var(--black);
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
 
-.f3-title-word.shadowed {
-  color: var(--gold);
-  text-shadow: 2px 4px 8px rgba(212, 175, 55, 0.2);
-}
+  .f3-title-word.shadowed {
+    color: var(--gold);
+    text-shadow: 2px 4px 8px rgba(212, 175, 55, 0.2);
+  }
 
-.f3-title-word.indented { margin-left: clamp(20px, 6vw, 60px); }
+  .f3-title-word.indented {
+    margin-left: clamp(20px, 6vw, 60px);
+  }
 
-.f3-desc {
-  font-weight: 500;
-  font-size: clamp(0.85rem, 1.2vw, 0.95rem);
-  color: var(--text2);
-  line-height: 1.6;
-  max-width: 320px;
-  margin-bottom: 2rem;
-}
+  .f3-desc {
+    font-weight: 500;
+    font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+    color: var(--text2);
+    line-height: 1.6;
+    max-width: 320px;
+    margin-bottom: 2rem;
+  }
 
-.f3-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
-}
+  .f3-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
 
-.f3-tag {
-  background: var(--bg3);
-  color: var(--text);
-  padding: 0.4rem 1rem;
-  border-radius: var(--r-full);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
+  .f3-tag {
+    background: var(--bg3);
+    color: var(--text);
+    padding: 0.4rem 1rem;
+    border-radius: var(--r-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
 
-.f3-price-area {
-  display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
-  margin-bottom: 2rem;
-}
+  .f3-price-area {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
 
-.f3-price-main {
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
-  font-weight: 900;
-  color: var(--black);
-}
+  .f3-price-main {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: var(--black);
+  }
 
-.f3-price-strike {
-  font-size: 1.1rem;
-  text-decoration: line-through;
-  color: var(--text3);
-}
+  .f3-price-strike {
+    font-size: 1.1rem;
+    text-decoration: line-through;
+    color: var(--text3);
+  }
 
-.f3-discount-badge {
-  background: var(--gold);
-  color: var(--black);
-  font-size: 0.75rem;
-  font-weight: 800;
-  padding: 0.25rem 0.6rem;
-  border-radius: var(--r-sm);
-}
+  .f3-discount-badge {
+    background: var(--gold);
+    color: var(--black);
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--r-sm);
+  }
 
-.f3-add-btn {
-  background: var(--black);
-  color: var(--white);
-  font-size: 1rem;
-  font-weight: 700;
-  padding: 1.1rem 2.2rem;
-  border-radius: var(--r-full);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  width: max-content;
-  transition: all var(--t);
-  box-shadow: var(--sh-md);
-}
+  .f3-add-btn {
+    background: var(--black);
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 1.1rem 2.2rem;
+    border-radius: var(--r-full);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: max-content;
+    transition: all var(--t);
+    box-shadow: var(--sh-md);
+  }
 
-.f3-add-btn:hover { background: var(--gold); transform: translateY(-3px); box-shadow: var(--sh-lg); }
+  .f3-add-btn:hover {
+    background: var(--gold);
+    transform: translateY(-3px);
+    box-shadow: var(--sh-lg);
+  }
 
-.f3-center-col {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
+  .f3-center-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
 
-.f3-glow-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: clamp(10rem, 25vw, 22rem);
-  font-weight: 900;
-  color: var(--bg2);
-  letter-spacing: -0.04em;
-  z-index: 0;
-  opacity: 0.6;
-  pointer-events: none;
-}
+  .f3-glow-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(10rem, 25vw, 22rem);
+    font-weight: 900;
+    color: var(--bg2);
+    letter-spacing: -0.04em;
+    z-index: 0;
+    opacity: 0.6;
+    pointer-events: none;
+  }
 
-.f3-product-img {
-  position: relative;
-  z-index: 5;
-  width: 100%;
-  max-width: 450px;
-  height: auto;
-  filter: drop-shadow(0 20px 50px rgba(0,0,0,0.15));
-  animation: float 6s ease-in-out infinite;
-}
+  .f3-product-img {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.15));
+    animation: float 6s ease-in-out infinite;
+  }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
 
-.f3-right-col { display: flex; flex-direction: column; justify-content: center; }
+  .f3-right-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
-.f3-spec-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding: 0.85rem 0;
-  border-bottom: 1px solid var(--border2);
-  gap: 1rem;
-}
+  .f3-spec-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--border2);
+    gap: 1rem;
+  }
 
-.f3-spec-label {
-  font-size: clamp(0.7rem, 1vw, 0.8rem);
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text3);
-}
+  .f3-spec-label {
+    font-size: clamp(0.7rem, 1vw, 0.8rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text3);
+  }
 
-.f3-spec-values { text-align: right; }
-.f3-spec-val-main { font-size: 0.85rem; font-weight: 700; color: var(--black); }
-.f3-spec-val-sub { font-size: 0.7rem; color: var(--text3); margin-top: 2px; }
+  .f3-spec-values {
+    text-align: right;
+  }
+  .f3-spec-val-main {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--black);
+  }
+  .f3-spec-val-sub {
+    font-size: 0.7rem;
+    color: var(--text3);
+    margin-top: 2px;
+  }
 
-.f3-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid var(--border2);
-  padding-top: 1.5rem;
-  margin-top: 2rem;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
+  .f3-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border2);
+    padding-top: 1.5rem;
+    margin-top: 2rem;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
 
-.f3-footer div { font-size: 0.75rem; font-weight: 600; color: var(--text3); }
+  .f3-footer div {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text3);
+  }
 
-@media(max-width: 1100px) {
-  .f3-content-grid { grid-template-columns: 1fr 1fr; }
-  .f3-right-col { display: none; }
-}
+  @media (max-width: 1100px) {
+    .f3-content-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .f3-right-col {
+      display: none;
+    }
+  }
 
-@media(max-width: 768px) {
-  .f3-content-grid { grid-template-columns: 1fr; gap: 3rem; }
-  .f3-center-col { order: -1; }
-  .f3-left-col { align-items: center; text-align: center; }
-  .f3-desc { margin-inline: auto; }
-  .f3-tags { justify-content: center; }
-  .f3-price-area { justify-content: center; }
-  .f3-title-word { font-size: clamp(2.5rem, 10vw, 4rem); }
-  .f3-title-word.indented { margin-left: 0; }
-  .f3-footer { justify-content: center; text-align: center; }
-  .f3-card { padding: 2rem 1.5rem; min-height: auto; }
-  .f3-product-img { max-width: 300px; }
-}
+  @media (max-width: 768px) {
+    .f3-content-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .f3-center-col {
+      order: -1;
+    }
+    .f3-left-col {
+      align-items: center;
+      text-align: center;
+    }
+    .f3-desc {
+      margin-inline: auto;
+    }
+    .f3-tags {
+      justify-content: center;
+    }
+    .f3-price-area {
+      justify-content: center;
+    }
+    .f3-title-word {
+      font-size: clamp(2.5rem, 10vw, 4rem);
+    }
+    .f3-title-word.indented {
+      margin-left: 0;
+    }
+    .f3-footer {
+      justify-content: center;
+      text-align: center;
+    }
+    .f3-card {
+      padding: 2rem 1.5rem;
+      min-height: auto;
+    }
+    .f3-product-img {
+      max-width: 300px;
+    }
+  }
 {% endstyle %}
 
 <section class="f3-wrapper" id="Hero">
   <div class="f3-card">
-    
     <header class="f3-header">
       <div class="f3-brand-group">
         <div class="f3-brand-line"></div>
-        <div class="f3-brand-text">
-          <span>OMNILYX</span> <span>.SkinCare</span>
-        </div>
+        <div class="f3-brand-text"><span>OMNILYX</span> <span>.SkinCare</span></div>
       </div>
       <div class="f3-menu-icon" aria-label="Menu">
         <div></div>
@@ -282,37 +359,45 @@
     <div class="f3-glow-text">GLOW</div>
 
     <div class="f3-content-grid">
-      
       <div class="f3-left-col">
         <div class="f3-title">
           <span class="f3-title-word">Constituir</span>
           <span class="f3-title-word shadowed">Glass Your</span>
           <span class="f3-title-word indented">Glow</span>
         </div>
-        
+
         <div class="f3-desc">
           Encased in heavy borosilicate glass.<br>
           Brightening actives that go deep. A product<br>
           that looks as good on your shelf as it works on<br>
           your skin.
         </div>
-        
+
         <div class="f3-tags">
           <span class="f3-tag">Niacinamide 5%</span>
           <span class="f3-tag">Alpha Arbutin 2%</span>
           <span class="f3-tag">Vitamin C SAP 2%</span>
           <span class="f3-tag">Glutathione</span>
         </div>
-        
+
         <div class="f3-price-area">
           <span class="f3-price-main">₹699</span>
           <span class="f3-price-strike">₹999</span>
           <span class="f3-discount-badge">30% OFF</span>
         </div>
-        
+
         <button class="f3-add-btn">
-          Add to Bag 
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          Add to Bag
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
@@ -321,13 +406,19 @@
 
       <div class="f3-center-col">
         {%- if section.settings.product_image != blank -%}
-          <img src="{{ section.settings.product_image | image_url: width: 800 }}"
-               alt="Constituir Brightening Cream"
-               class="f3-product-img"
-               width="800" height="auto" loading="eager">
+          <img
+            src="{{ section.settings.product_image | image_url: width: 800 }}"
+            alt="Constituir Brightening Cream"
+            class="f3-product-img"
+            width="800"
+            height="auto"
+            loading="eager"
+          >
         {%- else -%}
           <!-- Fallback dummy image block if no product image selected -->
-          <div style="width:300px; height:500px; background:linear-gradient(to bottom, #cfac5a, #4a4234); border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); z-index: 10;"></div>
+          <div
+            style="width:300px; height:500px; background:linear-gradient(to bottom, #cfac5a, #4a4234); border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); z-index: 10;"
+          ></div>
         {%- endif -%}
       </div>
 
@@ -391,15 +482,15 @@
           </div>
         </div>
       </div>
-
     </div>
 
     <footer class="f3-footer">
       <div class="f3-footer-left">Constituir • Glass Edition</div>
-      <div class="f3-footer-center">Dermatologist Tested • Paraben-Free • Cruelty-Free • Made in India • Recyclable Glass</div>
-      <div class="f3-footer-right">omnilux.com.in © Omnilux 2026</div>
+      <div class="f3-footer-center">
+        Dermatologist Tested • Paraben-Free • Cruelty-Free • Made in India • Recyclable Glass
+      </div>
+      {% comment %} <div class="f3-footer-right">omnilux.com.in © Omnilux 2026</div> {% endcomment %}
     </footer>
-
   </div>
 </section>
 
@@ -407,9 +498,7 @@
 {
   "name": "Hero (F3 Design)",
   "tag": "section",
-  "settings": [
-    { "type": "image_picker", "id": "product_image", "label": "Hero product image" }
-  ],
+  "settings": [{ "type": "image_picker", "id": "product_image", "label": "Hero product image" }],
   "presets": [{ "name": "Hero Component" }]
 }
 {% endschema %}

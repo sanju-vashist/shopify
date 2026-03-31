@@ -4,13 +4,15 @@
       <div class="contact-page__info">
         <p class="section-eyebrow">Get In Touch</p>
         <h1 class="contact-page__title">{{ page.title | default: 'Contact Us' }}</h1>
-        <div class="contact-page__desc">{{ page.content | default: '<p>Have questions about our products? We love hearing from our community.</p>' }}</div>
+        <div class="contact-page__desc">
+          {{ page.content | default: '<p>Have questions about our products? We love hearing from our community.</p>' }}
+        </div>
         <div class="contact-details">
           <div class="contact-detail-item">
             <span class="contact-detail-item__icon">✉</span>
             <div>
               <p class="contact-detail-item__label">Email</p>
-              <a href="mailto:hello@omnilux.com.in">hello@omnilux.com.in</a>
+              <a href="mailto:omnilyxomnilyx@gmail.com">omnilyxomnilyx@gmail.com</a>
             </div>
           </div>
           <div class="contact-detail-item">
@@ -48,16 +50,39 @@
             <div class="form-row form-row--2col">
               <div class="form-field">
                 <label for="ContactName">Name *</label>
-                <input type="text" id="ContactName" name="contact[name]" autocomplete="name" required placeholder="Your full name" value="{{ form.name }}">
+                <input
+                  type="text"
+                  id="ContactName"
+                  name="contact[name]"
+                  autocomplete="name"
+                  required
+                  placeholder="Your full name"
+                  value="{{ form.name }}"
+                >
               </div>
               <div class="form-field">
                 <label for="ContactEmail">Email *</label>
-                <input type="email" id="ContactEmail" name="contact[email]" autocomplete="email" required placeholder="you@example.com" value="{{ form.email }}">
+                <input
+                  type="email"
+                  id="ContactEmail"
+                  name="contact[email]"
+                  autocomplete="email"
+                  required
+                  placeholder="you@example.com"
+                  value="{{ form.email }}"
+                >
               </div>
             </div>
             <div class="form-field">
               <label for="ContactPhone">Phone</label>
-              <input type="tel" id="ContactPhone" name="contact[phone]" autocomplete="tel" placeholder="+91 98765 43210" value="{{ form.phone }}">
+              <input
+                type="tel"
+                id="ContactPhone"
+                name="contact[phone]"
+                autocomplete="tel"
+                placeholder="+91 98765 43210"
+                value="{{ form.phone }}"
+              >
             </div>
             <div class="form-field">
               <label for="ContactSubject">Subject</label>
@@ -71,7 +96,13 @@
             </div>
             <div class="form-field">
               <label for="ContactMessage">Message *</label>
-              <textarea id="ContactMessage" name="contact[body]" rows="5" required placeholder="How can we help you?">{{ form.body }}</textarea>
+              <textarea
+                id="ContactMessage"
+                name="contact[body]"
+                rows="5"
+                required
+                placeholder="How can we help you?"
+              >{{ form.body }}</textarea>
             </div>
             <button type="submit" class="btn btn--primary btn--full">Send Message →</button>
           {%- endif -%}
