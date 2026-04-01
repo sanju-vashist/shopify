@@ -261,7 +261,12 @@ h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2}
 /* GALLERY */
 .product-gallery{position:sticky;top:calc(var(--header-h) + 1rem)}
 .product-gallery__main{aspect-ratio:4/5;background:var(--bg3);border-radius:var(--r-xl);overflow:hidden;margin-bottom:.75rem;position:relative}
-.product-gallery__main img{width:100%;height:100%;object-fit:cover;transition:all var(--t)}
+.product-gallery__main img{width:100%;height:100%;object-fit:contain;transition:all var(--t-slow)}
+.product-gallery__main:hover img{transform:scale(1.05)}
+.product-gallery__hover-info{position:absolute;bottom:0;left:0;right:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);padding:1.5rem;transform:translateY(100%);transition:transform var(--t-slow);z-index:10;border-top:1px solid var(--border2);display:flex;flex-direction:column;gap:0.5rem}
+.product-gallery__main:hover .product-gallery__hover-info{transform:translateY(0)}
+.product-gallery__hover-title{font-size:0.9rem;font-weight:700;color:var(--black);text-transform:uppercase;letter-spacing:0.05em}
+.product-gallery__hover-desc{font-size:0.8rem;color:var(--text2);line-height:1.5}
 .product-gallery__placeholder{width:100%;height:100%}
 .product-gallery__thumbs{display:flex;gap:.5rem;overflow-x:auto;scrollbar-width:none}
 .product-gallery__thumbs::-webkit-scrollbar{display:none}
@@ -287,8 +292,33 @@ h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2}
 .review-stars{color:var(--gold);font-size:.9rem;margin-bottom:.35rem}
 .product-review-item p{font-size:.82rem;font-weight:500;margin-bottom:.25rem}
 .product-review-item span{font-size:.75rem;color:var(--text3)}
-.related-products{margin-top:4rem}
-.related-products__title{font-family:var(--heading);font-style:italic;font-size:1.75rem;margin-bottom:2rem}
+.related-products{margin-top:6rem;padding-top:4rem;border-top:1px solid var(--border)}
+.related-products__title{font-family:var(--heading);font-style:italic;font-size:clamp(1.5rem,3vw,2.5rem);margin-bottom:3rem;text-align:center}
+
+/* CUSTOM REVIEWS SECTION */
+.product-reviews-section{margin-top:6rem;padding-top:4rem;border-top:1px solid var(--border)}
+.reviews-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:3rem;gap:2rem;flex-wrap:wrap}
+.reviews-title{font-family:var(--heading);font-style:italic;font-size:clamp(1.5rem,3vw,2.5rem)}
+.reviews-summary{display:flex;align-items:center;gap:1.5rem}
+.reviews-rating-big{font-size:3rem;font-weight:800;color:var(--black)}
+.reviews-rating-details{display:flex;flex-direction:column;gap:0.25rem}
+.reviews-stars-wrap{color:var(--gold);font-size:1.25rem;letter-spacing:0.1em}
+.reviews-count-text{font-size:0.85rem;color:var(--text3)}
+
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));gap:2rem}
+.review-card{background:var(--bg2);border-radius:var(--r-lg);padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:all var(--t)}
+.review-card:hover{background:var(--white);box-shadow:var(--sh-md);transform:translateY(-2px)}
+.review-card__head{display:flex;align-items:center;justify-content:space-between}
+.review-card__stars{color:var(--gold);font-size:0.9rem;letter-spacing:0.05em}
+.review-card__date{font-size:0.75rem;color:var(--text3)}
+.review-card__author{display:flex;align-items:center;gap:0.75rem}
+.review-card__avatar{width:32px;height:32px;border-radius:50%;background:var(--gold-light);color:var(--gold-h);display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700}
+.review-card__name{font-size:0.875rem;font-weight:600;color:var(--black)}
+.review-card__verified{font-size:0.65rem;color:var(--success);background:rgba(16, 185, 129, 0.1);padding:0.1rem 0.4rem;border-radius:var(--r-sm);font-weight:700;text-transform:uppercase}
+.review-card__comment{font-size:0.9rem;line-height:1.6;color:var(--text2);font-style:italic}
+.review-card__footer{margin-top:auto;display:flex;align-items:center;gap:1rem}
+.review-card__help{font-size:0.75rem;color:var(--text3)}
+.review-card__help-btn{background:none;border:none;font-size:0.75rem;text-decoration:underline;cursor:pointer;color:var(--text2)}
 
 /* TESTIMONIALS */
 .testimonials__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}

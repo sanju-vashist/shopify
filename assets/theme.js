@@ -414,6 +414,26 @@ function initViewTransitions() {
   });
 }
 
+// ─── RECOMMENDATIONS ─────────────────────────
+function initRecommendations() {
+  const container = $('.product-recommendations');
+  if (!container) return;
+  const url = container.dataset.url;
+  fetch(url)
+    .then(res => res.text())
+    .then(html => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const recommendations = doc.querySelector('.product-recommendations');
+      if (recommendations && recommendations.innerHTML.trim().length > 0) {
+        container.innerHTML = recommendations.innerHTML;
+        // Re-init animations for new cards
+        initAnimations();
+      }
+    })
+    .catch(console.error);
+}
+
 // ─── INIT ─────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initStickyHeader();
@@ -426,4 +446,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothLinks();
   initAnimations();
   initViewTransitions();
+  initRecommendations();
 });

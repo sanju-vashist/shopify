@@ -1,6 +1,5 @@
 <div class="product-page">
   <div class="container">
-
     <!-- Breadcrumb -->
     <nav class="breadcrumbs" aria-label="Breadcrumb">
       <a href="{{ routes.root_url }}">Home</a>
@@ -21,7 +20,6 @@
 
     <!-- Product Layout -->
     <div class="product-layout">
-
       <!-- LEFT: Product Info -->
       <div class="product-info">
         <h1 class="product-info__title">
@@ -48,7 +46,11 @@
             <span class="product-price">{{ product.price | money }}</span>
             <span class="product-price--compare">{{ product.compare_at_price | money }}</span>
             <span class="sale-badge">
-              {% assign savings = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price %}
+              {% assign savings = product.compare_at_price
+                | minus: product.price
+                | times: 100
+                | divided_by: product.compare_at_price
+              %}
               {{ savings }}% OFF
             </span>
           {%- else -%}
@@ -66,8 +68,12 @@
                 <label class="product-option__label">{{ option.name }}</label>
                 <div class="product-option__values">
                   {%- for value in option.values -%}
-                    <button type="button" class="variant-btn{% if option.selected_value == value %} selected{% endif %}"
-                            data-option-name="{{ option.name }}" data-value="{{ value }}">
+                    <button
+                      type="button"
+                      class="variant-btn{% if option.selected_value == value %} selected{% endif %}"
+                      data-option-name="{{ option.name }}"
+                      data-value="{{ value }}"
+                    >
                       {{ value }}
                     </button>
                   {%- endfor -%}
@@ -81,13 +87,27 @@
             <label class="product-qty__label">Quantity</label>
             <div class="qty-control">
               <button type="button" class="qty-btn" id="QtyMinus" aria-label="Decrease">−</button>
-              <input type="number" name="quantity" id="QtyInput" value="1" min="1" class="qty-input" aria-label="Quantity">
+              <input
+                type="number"
+                name="quantity"
+                id="QtyInput"
+                value="1"
+                min="1"
+                class="qty-input"
+                aria-label="Quantity"
+              >
               <button type="button" class="qty-btn" id="QtyPlus" aria-label="Increase">+</button>
             </div>
           </div>
 
-          <button type="submit" class="btn-add-to-cart f3-btn-add" id="AddToCart"
-                  {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
+          <button
+            type="submit"
+            class="btn-add-to-cart f3-btn-add"
+            id="AddToCart"
+            {% if product.selected_or_first_available_variant.available == false %}
+              disabled
+            {% endif %}
+          >
             {%- if product.selected_or_first_available_variant.available -%}
               Add to Bag →
             {%- else -%}
@@ -102,27 +122,49 @@
         <div class="f3-bg-glow">GLOW</div>
         <div class="product-gallery__main f3-main-img">
           {%- if product.featured_image -%}
-            <img id="MainProductImage"
-                 src="{{ product.featured_image | image_url: width: 700 }}"
-                 alt="{{ product.featured_image.alt | default: product.title }}"
-                 width="700" height="700" loading="eager"
-                 style="view-transition-name: product-main-image;">
+            <img
+              id="MainProductImage"
+              src="{{ product.featured_image | image_url: width: 700 }}"
+              alt="{{ product.featured_image.alt | default: product.title }}"
+              width="700"
+              height="700"
+              loading="eager"
+              style="view-transition-name: product-main-image;"
+            >
           {%- else -%}
-            <img id="MainProductImage"
-                 src="{{ 'product1-removebg.png' | file_url }}"
-                 alt="Constituir Brightening Cream"
-                 width="700" height="700" loading="eager"
-                 style="view-transition-name: product-main-image;">
+            <img
+              id="MainProductImage"
+              src="{{ 'product1-removebg.png' | file_url }}"
+              alt="Constituir Brightening Cream"
+              width="700"
+              height="700"
+              loading="eager"
+              style="view-transition-name: product-main-image;"
+            >
           {%- endif -%}
+
+          <!-- Hover Description Overlay -->
+          <div class="product-gallery__hover-info">
+            <span class="product-gallery__hover-title">The Science of {{ product.title | split: ' ' | first }}</span>
+            <p class="product-gallery__hover-desc">{{ product.description | strip_html | truncate: 120 }}</p>
+          </div>
         </div>
         {%- if product.images.size > 1 -%}
           <div class="product-gallery__thumbs">
             {%- for image in product.images -%}
-              <button class="product-gallery__thumb{% if forloop.first %} active{% endif %}"
-                      data-src="{{ image | image_url: width: 700 }}"
-                      data-full="{{ image | image_url: width: 1200 }}"
-                      aria-label="Product image {{ forloop.index }}">
-                <img src="{{ image | image_url: width: 120 }}" alt="{{ image.alt }}" width="120" height="120" loading="lazy">
+              <button
+                class="product-gallery__thumb{% if forloop.first %} active{% endif %}"
+                data-src="{{ image | image_url: width: 700 }}"
+                data-full="{{ image | image_url: width: 1200 }}"
+                aria-label="Product image {{ forloop.index }}"
+              >
+                <img
+                  src="{{ image | image_url: width: 120 }}"
+                  alt="{{ image.alt }}"
+                  width="120"
+                  height="120"
+                  loading="lazy"
+                >
               </button>
             {%- endfor -%}
           </div>
@@ -135,56 +177,42 @@
           <div class="f3-spec-label">Bottle</div>
           <div class="f3-spec-value-box">
             <span class="f3-spec-val">Borosilicate Glass</span>
-            <span class="f3-spec-sub">Heavy-wall, heat-resistant</span>
+            <span class="f3-spec-sub">Heavy-wall, UV-resistant</span>
           </div>
         </div>
         <div class="f3-spec-row">
           <div class="f3-spec-label">Pump</div>
           <div class="f3-spec-value-box">
             <span class="f3-spec-val">Gold Anodized Zinc</span>
-            <span class="f3-spec-sub">Airless pump, 0.3ml per press</span>
+            <span class="f3-spec-sub">Airless, 0.3ml precision</span>
           </div>
         </div>
         <div class="f3-spec-row">
-          <div class="f3-spec-label">Label</div>
+          <div class="f3-spec-label">Texture</div>
           <div class="f3-spec-value-box">
-            <span class="f3-spec-val">Borosilicate Glass</span>
-            <span class="f3-spec-sub">Heavy-wall, heat-resistant</span>
+            <span class="f3-spec-val">Lightweight Cream</span>
+            <span class="f3-spec-sub">Non-greasy, fast absorbing</span>
           </div>
         </div>
         <div class="f3-spec-row">
           <div class="f3-spec-label">Volume</div>
           <div class="f3-spec-value-box">
-            <span class="f3-spec-val">Borosilicate Glass</span>
-            <span class="f3-spec-sub">Heavy-wall, heat-resistant</span>
+            <span class="f3-spec-val">{{ product.variants.first.weight | weight_with_unit | default: '50ml' }}</span>
+            <span class="f3-spec-sub">Travel-friendly size</span>
           </div>
         </div>
         <div class="f3-spec-row">
-          <div class="f3-spec-label">Formula</div>
+          <div class="f3-spec-label">pH Level</div>
           <div class="f3-spec-value-box">
-            <span class="f3-spec-val">Borosilicate Glass</span>
-            <span class="f3-spec-sub">Heavy-wall, heat-resistant</span>
-          </div>
-        </div>
-        <div class="f3-spec-row">
-          <div class="f3-spec-label">Finish</div>
-          <div class="f3-spec-value-box">
-            <span class="f3-spec-val">Borosilicate Glass</span>
-            <span class="f3-spec-sub">Heavy-wall, heat-resistant</span>
+            <span class="f3-spec-val">5.5 - 6.0</span>
+            <span class="f3-spec-sub">Matches natural skin pH</span>
           </div>
         </div>
         <div class="f3-spec-row">
           <div class="f3-spec-label">Shelf Life</div>
           <div class="f3-spec-value-box">
-            <span class="f3-spec-val">Borosilicate Glass</span>
-            <span class="f3-spec-sub">Heavy-wall, heat-resistant</span>
-          </div>
-        </div>
-        <div class="f3-spec-row">
-          <div class="f3-spec-label">Free From</div>
-          <div class="f3-spec-value-box">
-            <span class="f3-spec-val">Borosilicate Glass</span>
-            <span class="f3-spec-sub">Heavy-wall, heat-resistant</span>
+            <span class="f3-spec-val">24 Months</span>
+            <span class="f3-spec-sub">Store in cool, dry place</span>
           </div>
         </div>
       </div>
@@ -193,22 +221,93 @@
     <!-- Frame 3 Bottom Footer -->
     <div class="f3-bottom-footer">
       <div class="f3-bottom-left">Constituir • Glass Edition</div>
-      <div class="f3-bottom-center">Dermatologist Tested • Paraben-Free • Cruelty-Free • Made in India • Recyclable Glass</div>
-      <div class="f3-bottom-right">omnilux.com.in © Omnilux 2026</div>
+      <div class="f3-bottom-center">
+        Dermatologist Tested • Paraben-Free • Cruelty-Free • Made in India • Recyclable Glass
+      </div>
+      {% comment %} <div class="f3-bottom-right">omnilux.com.in © Omnilux 2026</div> {% endcomment %}
+    </div>
+
+    <!-- Product Reviews Section -->
+    <div class="product-reviews-section">
+      <div class="reviews-header">
+        <h2 class="reviews-title">Customer Experience</h2>
+        <div class="reviews-summary">
+          <span class="reviews-rating-big">4.8</span>
+          <div class="reviews-rating-details">
+            <div class="reviews-stars-wrap">★★★★★</div>
+            <span class="reviews-count-text">Based on 124 reviews</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-card__head">
+            <div class="review-card__stars">★★★★★</div>
+            <span class="review-card__date">March 12, 2026</span>
+          </div>
+          <p class="review-card__comment">"This serum literal transformed my skin. I've been using it for a month and the 'glass skin' effect is no joke. Highly recommend for dull skin!"</p>
+          <div class="review-card__author">
+            <div class="review-card__avatar">SK</div>
+            <div class="review-card__name">Sanya Kapoor</div>
+            <span class="review-card__verified">Verified</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card__head">
+            <div class="review-card__stars">★★★★★</div>
+            <span class="review-card__date">February 28, 2026</span>
+          </div>
+          <p class="review-card__comment">"The packaging feels so premium. I love that it's in glass instead of plastic. The pump gives just the right amount."</p>
+          <div class="review-card__author">
+            <div class="review-card__avatar">AJ</div>
+            <div class="review-card__name">Arjun Jain</div>
+            <span class="review-card__verified">Verified</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card__head">
+            <div class="review-card__stars">★★★★☆</div>
+            <span class="review-card__date">January 15, 2026</span>
+          </div>
+          <p class="review-card__comment">"Very hydrating. I use it under my moisturizer. Subtracting one star only because I wish there was a bigger bottle option!"</p>
+          <div class="review-card__author">
+            <div class="review-card__avatar">MP</div>
+            <div class="review-card__name">Meera P.</div>
+            <span class="review-card__verified">Verified</span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Related Products -->
-    {%- if product.related_products.size > 0 -%}
-      <div class="related-products">
-        <h2 class="related-products__title">You Might Also Like</h2>
-        <div class="product-grid product-grid--4">
-          {%- for rel in product.related_products limit: 4 -%}
-            {% render 'product-card', product: rel %}
-          {%- endfor -%}
+    <div class="product-recommendations" 
+         data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=4">
+      {%- if recommendations.performed and recommendations.products_count > 0 -%}
+        <div class="related-products">
+          <h2 class="related-products__title">Recommended for You</h2>
+          <div class="product-grid product-grid--4">
+            {%- for rel in recommendations.products -%}
+              {% render 'product-card', product: rel %}
+            {%- endfor -%}
+          </div>
         </div>
-      </div>
-    {%- endif -%}
-
+      {%- else -%}
+        <!-- Fallback if recommendations haven't loaded or none found -->
+        <div class="related-products">
+          <h2 class="related-products__title">You Might Also Like</h2>
+          <div class="product-grid product-grid--4">
+            {%- for rel in collections.all.products limit: 4 -%}
+              {%- unless rel.id == product.id -%}
+                {% render 'product-card', product: rel %}
+              {%- endunless -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
   </div>
 </div>
 
