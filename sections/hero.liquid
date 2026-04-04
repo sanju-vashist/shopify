@@ -412,13 +412,24 @@
       </div>
 
       <div class="f3-center-col">
+        {%- assign hero_default = all_products['constituir'] -%}
+        {%- assign hero_p = section.settings.product | default: hero_default -%}
         {%- if section.settings.product_image != blank -%}
           <img
             src="{{ section.settings.product_image | image_url: width: 800 }}"
-            alt="Constituir Brightening Cream"
+            alt="{{ section.settings.title }}"
             class="f3-product-img"
             width="800"
-            height="auto"
+            height="1200"
+            loading="eager"
+          >
+        {%- elsif hero_p.featured_image != blank -%}
+          <img
+            src="{{ hero_p.featured_image | image_url: width: 800 }}"
+            alt="{{ hero_p.title }}"
+            class="f3-product-img"
+            width="800"
+            height="1200"
             loading="eager"
           >
         {%- else -%}
@@ -506,7 +517,10 @@
 {
   "name": "Hero (F3 Design)",
   "tag": "section",
-  "settings": [{ "type": "image_picker", "id": "product_image", "label": "Hero product image" }],
+  "settings": [
+    { "type": "product", "id": "product", "label": "Select Product" },
+    { "type": "image_picker", "id": "product_image", "label": "Custom Hero Image (overrides product image)" }
+  ],
   "presets": [{ "name": "Hero Component" }]
 }
 {% endschema %}

@@ -149,12 +149,12 @@ h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2}
   .product-grid--4{grid-template-columns:repeat(3,1fr)}
 }
 @media(max-width:768px){
-  .product-grid--3, .product-grid--4, .product-grid--5, .product-grid--6 {grid-template-columns:repeat(2,1fr); gap: 1rem}
-  .section{padding:3rem 0}
+  .product-grid--3, .product-grid--4, .product-grid--5, .product-grid--6 {grid-template-columns:repeat(2,1fr); gap: 0.75rem}
+  .section{padding:1.5rem 0}
 }
 @media(max-width:480px){
   .product-grid--2, .product-grid--3, .product-grid--4, .product-grid--5, .product-grid--6 {grid-template-columns:repeat(2,1fr); gap: 0.5rem}
-  .container{padding:0 1rem}
+  .container{padding:0 0.75rem}
 }
 
 /* PRODUCT CARD */
@@ -551,13 +551,13 @@ h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2}
   .product-info__bg-text{display:none}
 }
 @media(max-width:600px){
-  :root{--pad:1rem}
-  .section{padding:2.5rem 0}
-  .hero__title{font-size:2.25rem}
-  .product-page{padding:1rem 0}
-  .breadcrumbs{margin-bottom:0.75rem}
-  .f3-brand-bar{margin-bottom:1.5rem; margin-top:0.5rem}
-  .header__logo img{max-height:36px}
+  :root{--pad:0.75rem}
+  .section{padding:1.5rem 0}
+  .hero__title{font-size:2rem}
+  .product-page{padding:0.5rem 0}
+  .breadcrumbs{margin-bottom:0.55rem}
+  .f3-brand-bar{margin-bottom:1rem; margin-top:0.25rem}
+  .header__logo img{max-height:32px}
 }
 
 /* === FADE-IN ANIMATIONS === */
