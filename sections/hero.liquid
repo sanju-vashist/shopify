@@ -338,7 +338,14 @@
       min-height: auto;
     }
     .f3-product-img {
-      max-width: 300px;
+      max-width: 200px;
+    }
+    .f3-title-word {
+      font-size: clamp(2rem, 8vw, 3rem);
+    }
+    .f3-desc {
+      font-size: 0.8rem;
+      max-width: 280px;
     }
   }
 {% endstyle %}
@@ -415,10 +422,11 @@
             loading="eager"
           >
         {%- else -%}
-          <!-- Fallback dummy image block if no product image selected -->
-          <div
-            style="width:300px; height:500px; background:linear-gradient(to bottom, #cfac5a, #4a4234); border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); z-index: 10;"
-          ></div>
+          <!-- Fallback professional placeholder -->
+          <div class="f3-placeholder-wrap" style="width:280px; height:420px; background:var(--bg3); border-radius: 20px; display:flex; flex-direction:column; align-items:center; justify-content:center; border:2px dashed var(--border2); color:var(--text3); gap: 1rem;">
+            {{ 'product-1' | placeholder_svg_tag: 'f3-placeholder-svg' | replace: 'f3-placeholder-svg', 'style="width:120px; height:120px; opacity:0.3;"' }}
+            <p style="font-size:0.8rem; font-weight:600; text-transform:uppercase; letter-spacing:0.05em;">Select Product Image</p>
+          </div>
         {%- endif -%}
       </div>
 
