@@ -1,0 +1,214 @@
+<section class="brand-philosophy section" id="section-{{ section.id }}">
+  <div class="container fade-up">
+    <div class="philosophy__header">
+      <h2 class="philosophy__title">{{ section.settings.title | default: 'The future of personal care is here' }}</h2>
+      <p class="philosophy__subtitle">{{ section.settings.subtitle | default: 'Embrace Minimalist, where each element is chosen for its scientific merit, offering you authentic, effective skincare solutions.' }}</p>
+    </div>
+
+    <div class="philosophy__grid">
+      {%- for block in section.blocks -%}
+        <div class="philosophy__item" {{ block.shopify_attributes }}>
+          <div class="philosophy__icon">
+            {%- case block.type -%}
+              {%- when 'transparency' -%}
+                <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="22" cy="38" r="14" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="38" cy="22" r="14" stroke="currentColor" stroke-width="1.5"/>
+                  <defs>
+                    <pattern id="diagonal-stripe" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                      <line x1="0" y1="0" x2="0" y2="4" stroke="currentColor" stroke-width="1" />
+                    </pattern>
+                  </defs>
+                  <circle cx="38" cy="22" r="14" fill="url(#diagonal-stripe)" />
+                </svg>
+              {%- when 'efficacy' -%}
+                <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M22 10H38" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M27 10V25L15 48C13.5 51 16 54 19 54H41C44 54 46.5 51 45 48L33 25V10" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M22 42H38" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2"/>
+                  <circle cx="26" cy="46" r="1.5" fill="currentColor"/>
+                  <circle cx="34" cy="48" r="1" fill="currentColor"/>
+                  <circle cx="30" cy="50" r="1.2" fill="currentColor"/>
+                </svg>
+              {%- when 'affordable' -%}
+                <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M24 20C24 17.7909 25.7909 16 28 16H32C34.2091 16 36 17.7909 36 20V24H24V20Z" stroke="currentColor" stroke-width="2"/>
+                  <path d="M26 24V40C26 42.2091 27.7909 44 30 44C32.2091 44 34 42.2091 34 40V24" stroke="currentColor" stroke-width="2"/>
+                  <path d="M22 24H38" stroke="currentColor" stroke-width="2"/>
+                  <path d="M30 44V54L28 56L30 58L32 56L30 54" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M28 8L32 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M30 8V16" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              {%- when 'quality' -%}
+                <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="30" cy="30" r="22" stroke="currentColor" stroke-width="2"/>
+                  <path d="M10 30C10 30 18 20 30 20C42 20 50 30 50 30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  <path d="M10 30C10 30 18 40 30 40C42 40 50 30 50 30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  <path d="M30 8V52" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2"/>
+                  <path d="M8 30H52" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2"/>
+                  <path d="M16 16L44 44" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2"/>
+                  <path d="M44 16L16 44" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2"/>
+                </svg>
+              {%- else -%}
+                {{ block.settings.custom_icon }}
+            {%- endcase -%}
+          </div>
+          <h3 class="philosophy__item-title">{{ block.settings.title }}</h3>
+          <p class="philosophy__item-text">{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+.brand-philosophy {
+  background: var(--bg);
+  padding: 8rem 0;
+  text-align: center;
+}
+.philosophy__header {
+  max-width: 800px;
+  margin: 0 auto 5rem;
+}
+.philosophy__title {
+  font-family: var(--font);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2rem;
+  letter-spacing: -0.02em;
+}
+.philosophy__subtitle {
+  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+  color: var(--text2);
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.philosophy__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.philosophy__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+.philosophy__item:hover {
+  transform: translateY(-5px);
+}
+.philosophy__icon {
+  width: 64px;
+  height: 64px;
+  color: var(--black);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.philosophy__icon svg {
+  width: 100%;
+  height: 100%;
+}
+.philosophy__item-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+.philosophy__item-text {
+  font-size: 0.875rem;
+  color: var(--text3);
+  line-height: 1.5;
+  max-width: 200px;
+}
+
+@media (max-width: 1024px) {
+  .philosophy__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem 2rem;
+  }
+}
+@media (max-width: 600px) {
+  .brand-philosophy {
+    padding: 5rem 0;
+  }
+  .philosophy__grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Brand Philosophy",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "The future of personal care is here"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "Embrace Minimalist, where each element is chosen for its scientific merit, offering you authentic, effective skincare solutions."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "transparency",
+      "name": "Transparency",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Transparency" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Full disclosure of ingredients used & their concentration" }
+      ]
+    },
+    {
+      "type": "efficacy",
+      "name": "Efficacy",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Efficacy" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Formulations developed in our in-house laboratories" }
+      ]
+    },
+    {
+      "type": "affordable",
+      "name": "Affordable",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Affordable" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Skincare, accessible to all" }
+      ]
+    },
+    {
+      "type": "quality",
+      "name": "Only the best",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Only the best" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Ingredients sourced from across the world" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand Philosophy",
+      "blocks": [
+        { "type": "transparency" },
+        { "type": "efficacy" },
+        { "type": "affordable" },
+        { "type": "quality" }
+      ]
+    }
+  ]
+}
+{% endschema %}

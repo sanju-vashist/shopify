@@ -1,8 +1,8 @@
 {% assign col = section.settings.collection %}
 {% if col != blank %}
-  {% assign products = col.products | limit: section.settings.products_to_show %}
+{% assign products = col.products %}
 {% else %}
-  {% assign products = collections.all.products | limit: section.settings.products_to_show %}
+  {% assign products = collections.all.products %}
 {% endif %}
 
 <section class="featured-collection section">
@@ -18,7 +18,7 @@
     </div>
 
     <div class="product-grid product-grid--{{ section.settings.columns }}">
-      {%- for product in products -%}
+      {%- for product in products limit: section.settings.products_to_show -%}
         {% render 'product-card', product: product %}
       {%- else -%}
         {%- for i in (1..section.settings.products_to_show) -%}

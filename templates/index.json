@@ -13,7 +13,18 @@
       "block_order": ["t1","t2","t3"],
       "settings": {}
     },
-    "newsletter": { "type": "newsletter", "settings": {} }
+    "newsletter": { "type": "newsletter", "settings": {} },
+    "philosophy": {
+      "type": "brand-philosophy",
+      "blocks": {
+        "b1": { "type": "transparency", "settings": { "title": "Transparency", "text": "Full disclosure of ingredients used & their concentration" } },
+        "b2": { "type": "efficacy", "settings": { "title": "Efficacy", "text": "Formulations developed in our in-house laboratories" } },
+        "b3": { "type": "affordable", "settings": { "title": "Affordable", "text": "Skincare, accessible to all" } },
+        "b4": { "type": "quality", "settings": { "title": "Only the best", "text": "Ingredients sourced from across the world" } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"],
+      "settings": {}
+    }
   },
-  "order": ["hero", "marquee", "featured", "testimonials", "newsletter"]
+  "order": ["hero", "marquee", "featured", "philosophy", "testimonials", "newsletter"]
 }
