@@ -24,7 +24,16 @@
       },
       "block_order": ["b1", "b2", "b3", "b4"],
       "settings": {}
+    },
+    "neurocalm": {
+      "type": "neurocalm"
+    },
+    "reels": {
+      "type": "reels"
+    },
+    "founder": {
+      "type": "founder"
     }
   },
-  "order": ["hero", "marquee", "featured", "philosophy", "testimonials", "newsletter"]
+  "order": ["hero", "marquee", "featured", "neurocalm", "reels", "founder", "philosophy", "testimonials", "newsletter"]
 }
