@@ -1,0 +1,340 @@
+/* === NEW SECTIONS === */
+
+/* REELS SECTION */
+.reels-section {
+  padding: 4rem 0;
+  background: #ffffff;
+}
+.reels-title {
+  text-align: center;
+  font-family: var(--font);
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+.reels-title strong {
+  font-weight: 700;
+}
+.reels-grid {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 1rem;
+}
+.reels-grid::-webkit-scrollbar {
+  display: none;
+}
+.reels-card {
+  flex: 0 0 calc(20% - 0.8rem);
+  min-width: 240px;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  position: relative;
+  background: #000;
+  aspect-ratio: 9/16;
+}
+.reels-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+}
+.reels-card__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background: var(--bg);
+  /* The original matched background for reels was a purple box at bottom, let's make it purple (#b8bacf) */
+  background: #9292c6;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.reels-card__overlay-top {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+.reels-card__product-img {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--r-sm);
+  background: #fff;
+  padding: 2px;
+  object-fit: contain;
+}
+.reels-card__title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.reels-card__prices {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.reels-card__price {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.reels-card__price-compare {
+  font-size: 0.8rem;
+  text-decoration: line-through;
+  opacity: 0.8;
+}
+
+/* FOUNDER SECTION */
+.founder-section {
+  padding: 4rem 0;
+  background: #fcf1f0; /* Peach/pink background */
+}
+.founder-container {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.founder-image-col {
+  flex: 1;
+  position: relative;
+  display: flex;
+}
+.founder-bg-text {
+  writing-mode: vertical-rl;
+  transform: scale(-1);
+  font-family: var(--font);
+  font-size: 8rem;
+  font-weight: 800;
+  color: #9292c6;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 0.8;
+}
+.founder-img-wrap {
+  flex: 1;
+  position: relative;
+  margin-left: -2rem;
+  z-index: 2;
+}
+.founder-img-wrap img {
+  width: 100%;
+  border-radius: 0;
+  object-fit: cover;
+}
+.founder-text-col {
+  flex: 1.2;
+  font-family: var(--font);
+  position: relative;
+}
+.founder-quote {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 2rem;
+}
+.founder-quote strong {
+  color: #9292c6;
+  font-weight: 700;
+}
+.founder-signature {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 2rem;
+  color: #9292c6;
+  margin-bottom: 0.25rem;
+}
+.founder-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #000;
+}
+@media (max-width: 900px) {
+  .founder-container {
+    flex-direction: column;
+  }
+}
+
+/* NEUROCALM SECTION */
+.neurocalm-section {
+  padding: 4rem 0;
+  background: #fcf1f0;
+}
+.neurocalm-grid {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.neurocalm-main {
+  background: #fdfaf6;
+  border-radius: var(--r-xl);
+  padding: 2.5rem;
+}
+.neurocalm-title {
+  text-align: center;
+  font-size: 1.75rem;
+  color: #9292c6;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+.neurocalm-title span {
+  font-weight: 400;
+  display: block;
+  font-size: 1.25rem;
+}
+.neurocalm-diagram img {
+  width: 100%;
+  object-fit: contain;
+}
+.neurocalm-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.neurocalm-side-card {
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  position: relative;
+  background: #fdfaf6;
+}
+.neurocalm-side-card img {
+  width: 100%;
+  height: 100%;
+  object-fit:cover;
+}
+.neurocalm-side-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: rgba(0,0,0,0.1);
+}
+.neurocalm-side-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* CUSTOM FOOTER (IMAGE 4) */
+.custom-footer {
+  background: #b8bacf;
+  color: #000;
+  padding: 4rem 0;
+  font-family: var(--font);
+}
+.cf-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+.cf-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+  gap: 2rem;
+}
+.cf-newsletter__title {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.cf-newsletter__desc {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  max-width: 250px;
+}
+.cf-form-group {
+  display: flex;
+  border-bottom: 1px solid #000;
+  padding-bottom: 0.5rem;
+  max-width: 300px;
+}
+.cf-form-group input {
+  background: transparent;
+  border: none;
+  font-size: 0.9rem;
+  flex: 1;
+  outline: none;
+  color: #000;
+}
+.cf-form-group input::placeholder {
+  color: rgba(0,0,0,0.6);
+}
+.cf-form-group button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.25rem;
+  color: #000;
+}
+.cf-menu-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+}
+.cf-menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.cf-menu-list a {
+  font-size: 0.85rem;
+  color: #000;
+  text-decoration: none;
+}
+.cf-menu-list a:hover {
+  text-decoration: underline;
+}
+.cf-socials {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+.cf-social-link {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  transition: all 0.3s ease;
+}
+.cf-social-link:hover {
+  background: #000;
+  color: #fff;
+}
+.cf-signature {
+  margin-top: 2rem;
+  text-align: right;
+  height: 80px;
+  position: relative;
+}
+.cf-signature img {
+  height: 100%;
+  object-fit: contain;
+  margin-left: auto;
+}
+@media (max-width: 900px) {
+  .cf-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}

@@ -1,4 +1,5 @@
 /* === OMNILYX THEME CSS === */
+@import url('new-sections.css');
 :root {
   --bg: #ffffff; --bg2: #f8faff; --bg3: #f0f4f8;
   --text: #050a14; --text2: #4a5568; --text3: #718096;

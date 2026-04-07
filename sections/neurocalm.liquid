@@ -1,0 +1,38 @@
+<div class="neurocalm-section">
+  <div class="neurocalm-grid">
+    <div class="neurocalm-main">
+      <h2 class="neurocalm-title">
+        How does NeuroCalm®
+        <span>help the Skin?</span>
+      </h2>
+      <div class="neurocalm-diagram">
+        <img src="{{ 'neurocalm-diagram.png' | asset_url }}" alt="NeuroCalm mechanism on skin" width="800" height="600" onerror="this.src='https://via.placeholder.com/800x600/fcf1f0/000000?text=NeuroCalm+Mechanism';">
+      </div>
+    </div>
+    
+    <div class="neurocalm-side">
+      <div class="neurocalm-side-card" style="height: 250px;">
+        <img src="{{ 'reduction-cortisol.png' | asset_url }}" alt="70% Reduction in Cortisol" width="400" height="250" onerror="this.src='https://via.placeholder.com/400x250/b8bacf/ffffff?text=Pen+Image';">
+        <div class="neurocalm-side-overlay">
+          <div class="neurocalm-side-text">70% REDUCTION<br>IN CORTISOL</div>
+        </div>
+      </div>
+      
+      <div class="neurocalm-side-card" style="flex:1; padding: 2rem; display: flex; align-items: center; justify-content: center;">
+        <img src="{{ 'neurocalm-icons.png' | asset_url }}" alt="NeuroCalm Properties" width="300" height="200" onerror="this.src='https://via.placeholder.com/300x200/fdfaf6/000000?text=NeuroCalm+Icons';">
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NeuroCalm Section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "NeuroCalm Section"
+    }
+  ]
+}
+{% endschema %}

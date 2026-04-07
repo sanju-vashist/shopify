@@ -1,6 +1,27 @@
 {
   "sections": {
-    "product-main": { "type": "product-main", "settings": { "show_vendor": true, "show_specs": true, "show_related": true } }
+    "product-main": {
+      "type": "product-main",
+      "settings": {
+        "show_vendor": true,
+        "show_specs": true,
+        "show_related": true
+      }
+    },
+    "neurocalm": {
+      "type": "neurocalm"
+    },
+    "reels": {
+      "type": "reels"
+    },
+    "founder": {
+      "type": "founder"
+    }
   },
-  "order": ["product-main"]
+  "order": [
+    "product-main",
+    "neurocalm",
+    "reels",
+    "founder"
+  ]
 }
