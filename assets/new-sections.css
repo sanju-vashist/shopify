@@ -1,10 +1,45 @@
 /* === NEW SECTIONS - PRODUCTION READY POLISH === */
 
+/* GLOBAL SCROLL SNAPPING & ANIMATIONS */
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+body .shopify-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Scroll Animation Classes */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+[data-animate].in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Staggering for lists of cards */
+[data-animate]:nth-child(2) { transition-delay: 0.1s; }
+[data-animate]:nth-child(3) { transition-delay: 0.2s; }
+[data-animate]:nth-child(4) { transition-delay: 0.3s; }
+[data-animate]:nth-child(5) { transition-delay: 0.4s; }
+
+
 /* REELS SECTION */
 .reels-section {
-  padding: 5rem 0;
+  padding: 0;
+  height: 100vh;
+  min-height: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background: #ffffff;
   overflow: hidden;
+  box-sizing: border-box;
 }
 .reels-title {
   text-align: center;
@@ -149,9 +184,15 @@
 /* FOUNDER SECTION */
 .founder-section {
   padding: 0;
+  height: 100vh;
+  min-height: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: #fdfaf6;
   position: relative;
   overflow: hidden;
+  box-sizing: border-box;
 }
 .founder-container {
   display: flex;
@@ -274,8 +315,14 @@
 
 /* NEUROCALM SECTION */
 .neurocalm-section {
-  padding: 6rem 0;
+  padding: 0;
+  height: 100vh;
+  min-height: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: #fcf1f0;
+  box-sizing: border-box;
 }
 .neurocalm-grid {
   display: grid;
